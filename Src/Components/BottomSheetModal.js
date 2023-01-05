@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -15,17 +15,20 @@ const BottomSheetModal = ({navigation, modal, setModal}) => {
         <View style={styles.Container}>
           <View style={styles.background}>
             <TouchableOpacity style={styles.icon}>
-              <Icons name={'delete'} size={30} color="black" />
-              <Text style={{fontSize: 20, color: 'black'}}>Delete</Text>
+              <Icons name={'delete'} size={30} color="#353336" />
+              <Text style={{fontSize: 20, color: '#353336', marginLeft: 15}}>
+                Delete
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.lebel}
               onPress={() => navigation.navigate('AddLabel')}>
-              <Icons name={'label-outline'} size={30} color="black" />
+              <Icons name={'label-outline'} size={30} color="#353336" />
               <Text
                 style={{
                   fontSize: 18,
-                  color: 'black',
+                  color: '#353336',
+                  marginLeft: 15,
                 }}>
                 Labels
               </Text>
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 60,
-    //margin: 350,
+    marginTop: 50,
   },
   background: {
     backgroundColor: '#dac5e6',
@@ -52,12 +55,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     marginLeft: -20,
   },
   lebel: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     marginTop: 30,
     marginLeft: -20,
   },

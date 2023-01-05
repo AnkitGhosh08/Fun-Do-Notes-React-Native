@@ -103,41 +103,19 @@ const AddNotes = ({navigation, route}) => {
         onChangeText={value => setNote(value)}
       />
 
-      <View style={style.modalView}>
+      <View>
         <TouchableOpacity
           style={style.dotsIcon}
           onPress={() => setModal(!modal)}>
           <Ionicons name={'ellipsis-vertical-sharp'} size={30} color="black" />
         </TouchableOpacity>
+      </View>
+      <View style={style.modalView}>
         <BottomSheetModal
           modal={modal}
           setModal={setModal}
           navigation={navigation}
         />
-
-        {/* <View style={style.centeredView}>
-          <Modal
-            transparent
-            animationType="fade"
-            visible={modalVisible}
-            onRequestClose={() => {
-              setModalVisible(!modalVisible);
-            }}>
-            <View style={style.Containers}>
-              <View style={style.background}>
-                <Text style={{color: 'black'}}> Delete </Text>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: '#d259f7',
-                    margin: 30,
-                    borderRadius: 10,
-                  }}
-                  onPress={() => {}}
-                />
-              </View>
-            </View>
-          </Modal>
-        </View> */}
       </View>
     </View>
   );
@@ -179,18 +157,7 @@ const style = StyleSheet.create({
     marginTop: 570,
     marginLeft: 350,
   },
-  Containers: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    padding: 60,
-  },
-  background: {
-    backgroundColor: '#dac5e6',
-    flex: 0.5,
-    padding: 50,
-    borderRadius: 20,
-  },
   modalView: {
-    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 });

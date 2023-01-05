@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import {View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../Navigations/AuthProvider';
-import {AddLabels} from '../Services.js/LableServices';
+import {AddLabels} from '../Services/LableServices';
 
 const AddLabel = ({navigation}) => {
   const [label, setLabel] = useState();
@@ -11,6 +11,7 @@ const AddLabel = ({navigation}) => {
 
   const onBackPress = async () => {
     let userId = user.uid;
+    console.log(userId);
     await AddLabels(label, userId);
     navigation.navigate('AddNotes');
   };
