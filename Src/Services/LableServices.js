@@ -7,7 +7,7 @@ export const addLabels = async (label, userId) => {
     await database.doc(userId).collection('LabelData').add({
       label: label,
     });
-    //  console.log('Label created.............');
+    // console.log('Label created.............');
   } catch (error) {
     console.log(error);
   }
@@ -41,7 +41,7 @@ export const deleteLabel = async (labelId, userId) => {
       .doc(labelId)
       .delete()
       .then(() => {
-        console.log('deleted....');
+        // console.log('deleted....');
       });
   } catch (error) {
     console.log(error);
@@ -58,7 +58,7 @@ export const updateLabel = async (label, labelId, userId) => {
         label: label,
       })
       .then(() => {
-        console.log('your label updated......');
+        // console.log('your label updated......');
       });
   } catch (error) {
     console.log(error);

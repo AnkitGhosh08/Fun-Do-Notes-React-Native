@@ -13,7 +13,7 @@ const AppStack = () => {
       <Stack.Screen name={'DrawerNavigation'} component={DrawerNavigation} />
       <Stack.Screen name={'AddNotes'} component={AddNotes} />
       <Stack.Screen name={'SearchBar'} component={SearchBar} />
-      <Stack.Screen name={'AddLabel'} component={AddLabel} />
+      <Stack.Screen name={'AddLabels'} component={AddLabel} />
     </Stack.Navigator>
   );
 };

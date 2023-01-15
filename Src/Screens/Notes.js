@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import {View, Text} from 'react-native';
 
 const Notes = () => {
-    return (
-        <View >
-            Notes
-        </View>
-    );
-}
+  return (
+    <View>
+      <Text>Notes</Text>
+    </View>
+  );
+};
 export default Notes;

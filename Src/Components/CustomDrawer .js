@@ -1,10 +1,31 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {DrawerContentScrollView} from '@react-navigation/drawer';
+import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {AuthContext} from '../Navigations/AuthProvider';
+import {fetchingLabel} from '../Services/LableServices';
+import {useSelector, useDispatch} from 'react-redux';
 
 const CustomDrawer = ({props, navigation}) => {
+  const dispatch = useDispatch();
+  const newLabel = useSelector(state => state.newLabel);
+
+  const {user} = useContext(AuthContext);
+
+  const getData = async () => {
+    const output = await fetchingLabel(user.uid);
+    dispatch({type: 'LABELDATA', payload: output});
+  };
+  //console.log(newLabel, '555555');
+
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //     getData();
+  //   });
+  //   return unsubscribe;
+  // }, []);
+
   return (
     <DrawerContentScrollView {...props} nestedScrollEnabled={true}>
       <View style={styles.container}>
@@ -38,20 +59,43 @@ const CustomDrawer = ({props, navigation}) => {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.labelIcon}
-          onPress={() => navigation.navigate('CreateNewLabel')}>
-          <Icons name={'label-outline'} size={30} color="#a507e3" />
-          <Text
-            style={{
-              fontSize: 18,
-              color: 'black',
-              textAlign: 'center',
-              marginLeft: 10,
-            }}>
-            Create new label
-          </Text>
-        </TouchableOpacity>
+        <View style={{borderColor: '#a507e3', backgroundColor: '#e3d8f0'}}>
+          <View style={{flexDirection: 'row', marginTop: 10}}>
+            <Text style={{marginLeft: 10, color: 'black', fontSize: 16}}>
+              Labels
+            </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('CreateNewLabel')}>
+              <Text style={{marginLeft: 150, fontSize: 16, color: 'black'}}>
+                Edit
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {newLabel.map(item => (
+            <TouchableOpacity key={item.labelId}>
+              <View style={styles.icon}>
+                <Icons name={'label-outline'} size={25} color="#a507e3" />
+                <Text style={styles.text}> {item.label}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+
+          <TouchableOpacity
+            style={styles.labelIcon}
+            onPress={() => navigation.navigate('CreateNewLabel')}>
+            <Icons name={'plus'} size={30} color="#a507e3" />
+            <Text
+              style={{
+                fontSize: 18,
+                color: 'black',
+                textAlign: 'center',
+                marginLeft: 10,
+              }}>
+              Create new label
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         <TouchableOpacity
           style={styles.archiveIcon}
@@ -116,31 +160,41 @@ const styles = StyleSheet.create({
   notesIcon: {
     flexDirection: 'row',
     marginTop: 20,
-    marginLeft: 15,
+    marginLeft: 20,
     alignContent: 'center',
   },
   reminderIcon: {
     flexDirection: 'row',
     marginTop: 20,
-    marginLeft: 15,
+    marginLeft: 20,
     alignContent: 'center',
   },
   labelIcon: {
     flexDirection: 'row',
     marginTop: 20,
-    marginLeft: 15,
+    marginLeft: 20,
     alignContent: 'center',
   },
   archiveIcon: {
     flexDirection: 'row',
     marginTop: 20,
-    marginLeft: 15,
+    marginLeft: 20,
     alignContent: 'center',
   },
   settingIcon: {
     flexDirection: 'row',
     marginTop: 20,
-    marginLeft: 15,
+    marginLeft: 20,
     alignContent: 'center',
+  },
+  text: {
+    fontSize: 18,
+    marginLeft: 10,
+    color: 'black',
+  },
+  icon: {
+    flexDirection: 'row',
+    marginTop: 20,
+    marginLeft: 20,
   },
 });

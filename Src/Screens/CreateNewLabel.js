@@ -12,20 +12,26 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {addLabels, fetchingLabel, deleteLabel} from '../Services/LableServices';
 import LabelCard from '../Components/LabelCard';
+import {useSelector, useDispatch} from 'react-redux';
 
 const CreateNewLabel = ({navigation}) => {
   const [label, setLabel] = useState();
-  const [labelData, setLabelData] = useState([]);
+  // const [labelData, setLabelData] = useState([]);
   const [close, setClose] = useState(false);
+
+  const dispatch = useDispatch();
+  const newLabel = useSelector(state => state.newLabel);
 
   const {user} = useContext(AuthContext);
   let userId = user.uid;
 
   const getData = async () => {
     const output = await fetchingLabel(user.uid);
-    setLabelData(output);
-    //console.log(output);
+    dispatch({type: 'LABELDATA', payload: output});
+
+    // setLabelData(output);
   };
+  // console.log(newLabel, '11111');
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -39,9 +45,11 @@ const CreateNewLabel = ({navigation}) => {
     await getData();
     setLabel('');
   };
+
   const onDeletePress = async (labelId, userId) => {
     await deleteLabel(labelId, userId);
   };
+
   return (
     <View>
       <View style={styles.container}>
@@ -53,7 +61,11 @@ const CreateNewLabel = ({navigation}) => {
         <Text style={styles.text}>Edit labels</Text>
       </View>
 
-      <View style={styles.inputindex}>
+      <View
+        style={[
+          styles.inputindex,
+          {borderColor: close ? '#7a43ab' : 'ghostwhite'},
+        ]}>
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {
@@ -79,7 +91,8 @@ const CreateNewLabel = ({navigation}) => {
       </View>
 
       <FlatList
-        data={labelData}
+        // data={labelData}
+        data={newLabel}
         keyExtractor={item => item.labelId}
         key={item => item.labelId}
         renderItem={({item}) => (
@@ -104,6 +117,7 @@ const styles = StyleSheet.create({
     height: 60,
     //backgroundColor: '#dac5e6',
     padding: 5,
+    // backgroundColor: 'white',
   },
   icon: {
     margin: 10,
@@ -114,10 +128,10 @@ const styles = StyleSheet.create({
   },
   inputindex: {
     flexDirection: 'row',
-    //backgroundColor: '#dac5e6',
+    //backgroundColor: 'white',
     borderWidth: 1,
     width: '100%',
-    borderColor: '#7a43ab',
+    // borderColor: '#7a43ab',
   },
   checkmark: {
     marginLeft: 170,

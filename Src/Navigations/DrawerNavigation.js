@@ -17,7 +17,7 @@ const DrawerNavigation = () => {
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{headerShown: false}}>
       <Drawer.Screen name={'Home'} component={Home} />
-      <Drawer.Screen name={'Notes'} component={Notes} />
+      <Drawer.Screen name={'Notes'} component={Home} />
       <Drawer.Screen name={'Reminders'} component={Reminders} />
       <Drawer.Screen name={'CreateNewLabel'} component={CreateNewLabel} />
       <Drawer.Screen name={'Archive'} component={Archive} />

@@ -10,8 +10,9 @@ export const addNote = async (
   archiveData,
   deleteData,
   reminderData,
+  labelData,
 ) => {
-  console.log('firebase.........', userId);
+  // console.log('firebase.........', userId);
   try {
     await database.doc(userId).collection('NoteData').add({
       title: title,
@@ -20,8 +21,9 @@ export const addNote = async (
       archiveData: archiveData,
       deleteData: deleteData,
       reminderData: reminderData,
+      labelData: labelData,
     });
-    console.log('Created data.............');
+    // console.log('Created data.............');
   } catch (error) {
     console.log(error);
   }
@@ -57,6 +59,7 @@ export const updateData = async (
   archiveData,
   deleteData,
   reminderData,
+  labelData,
 ) => {
   try {
     await database
@@ -70,9 +73,10 @@ export const updateData = async (
         archiveData: archiveData,
         deleteData: deleteData,
         reminderData: reminderData,
+        labelData: labelData,
       })
       .then(() => {
-        console.log('your data updated......');
+        // console.log('your data updated......');
       });
   } catch (error) {
     console.log(error);
@@ -87,7 +91,7 @@ export const deleteNote = async (noteId, userId) => {
       .doc(noteId)
       .delete()
       .then(() => {
-        console.log('user deleted......');
+        // console.log('user deleted......');
       });
   } catch (error) {
     console.log(error);

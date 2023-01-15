@@ -1,18 +1,13 @@
 import React, {useState, useContext} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AuthContext} from '../Navigations/AuthProvider';
-import {
-  fetchingLabel,
-  updateLabel,
-  deleteLabel,
-} from '../Services/LableServices';
+import {updateLabel} from '../Services/LableServices';
 
 const LabelCard = props => {
   const [edit, setEdit] = useState(false);
   const [update, setUpdate] = useState(props.label);
-  //const [labelData, setLabelData] = useState([]);
   const {user} = useContext(AuthContext);
   const userId = user.uid;
   // console.log(userId);

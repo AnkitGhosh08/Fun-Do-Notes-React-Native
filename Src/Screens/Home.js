@@ -49,7 +49,11 @@ const Home = ({navigation}) => {
   }, []);
 
   const goToUpdateNote = ({item}) => {
-    navigation.navigate('AddNotes', {editData: item, id: item.id});
+    navigation.navigate('AddNotes', {
+      editData: item,
+      id: item.id,
+      labelData: item.labelData,
+    });
   };
 
   const section = [

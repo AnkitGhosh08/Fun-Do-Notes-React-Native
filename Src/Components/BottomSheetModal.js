@@ -2,7 +2,7 @@ import React from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const BottomSheetModal = ({navigation, modal, setModal}) => {
+const BottomSheetModal = ({navigation, modal, setModal, noteData}) => {
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -22,7 +22,7 @@ const BottomSheetModal = ({navigation, modal, setModal}) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.lebel}
-              onPress={() => navigation.navigate('AddLabel')}>
+              onPress={() => navigation.navigate('AddLabels', {noteData})}>
               <Icons name={'label-outline'} size={30} color="#353336" />
               <Text
                 style={{
