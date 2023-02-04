@@ -11,10 +11,11 @@ export const addNote = async (
   deleteData,
   reminderData,
   labelData,
+  noteId,
 ) => {
   // console.log('firebase.........', userId);
   try {
-    await database.doc(userId).collection('NoteData').add({
+    await database.doc(userId).collection('NoteData').doc(noteId).set({
       title: title,
       note: note,
       pinData: pinData,

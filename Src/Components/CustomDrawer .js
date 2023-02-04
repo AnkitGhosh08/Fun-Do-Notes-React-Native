@@ -6,6 +6,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingLabel} from '../Services/LableServices';
 import {useSelector, useDispatch} from 'react-redux';
+import {
+  ALIGNCONTENT,
+  ALIGNITEMS,
+  COLOR,
+  FLEX,
+  FLEXDIRECTION,
+  MARGINLIFT,
+  MARGINTOP,
+} from '../Utility.js/Theme';
 
 const CustomDrawer = ({props, navigation}) => {
   const dispatch = useDispatch();
@@ -17,14 +26,6 @@ const CustomDrawer = ({props, navigation}) => {
     const output = await fetchingLabel(user.uid);
     dispatch({type: 'LABELDATA', payload: output});
   };
-  //console.log(newLabel, '555555');
-
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener('focus', () => {
-  //     getData();
-  //   });
-  //   return unsubscribe;
-  // }, []);
 
   return (
     <DrawerContentScrollView {...props} nestedScrollEnabled={true}>
@@ -72,7 +73,7 @@ const CustomDrawer = ({props, navigation}) => {
             </TouchableOpacity>
           </View>
 
-          {newLabel.map(item => (
+          {newLabel?.map(item => (
             <TouchableOpacity key={item.labelId}>
               <View style={styles.icon}>
                 <Icons name={'label-outline'} size={25} color="#a507e3" />
@@ -153,48 +154,48 @@ export default CustomDrawer;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 20,
-    alignContent: 'center',
+    flex: FLEX.FLEX,
+    marginTop: MARGINTOP.TOP,
+    alignContent: ALIGNITEMS.ITEM,
   },
   notesIcon: {
-    flexDirection: 'row',
-    marginTop: 20,
-    marginLeft: 20,
-    alignContent: 'center',
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    marginTop: MARGINTOP.TOP,
+    marginLeft: MARGINLIFT.LEFT,
+    alignContent: ALIGNITEMS.ITEM,
   },
   reminderIcon: {
-    flexDirection: 'row',
-    marginTop: 20,
-    marginLeft: 20,
-    alignContent: 'center',
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    marginTop: MARGINTOP.TOP,
+    marginLeft: MARGINLIFT.LEFT,
+    alignContent: ALIGNCONTENT.CENTER,
   },
   labelIcon: {
-    flexDirection: 'row',
-    marginTop: 20,
-    marginLeft: 20,
-    alignContent: 'center',
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    marginTop: MARGINTOP.TOP,
+    marginLeft: MARGINLIFT.LEFT,
+    alignContent: ALIGNCONTENT.CENTER,
   },
   archiveIcon: {
-    flexDirection: 'row',
-    marginTop: 20,
-    marginLeft: 20,
-    alignContent: 'center',
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    marginTop: MARGINTOP.TOP,
+    marginLeft: MARGINLIFT.LEFT,
+    alignContent: ALIGNCONTENT.CENTER,
   },
   settingIcon: {
-    flexDirection: 'row',
-    marginTop: 20,
-    marginLeft: 20,
-    alignContent: 'center',
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    marginTop: MARGINTOP.TOP,
+    marginLeft: MARGINLIFT.LEFT,
+    alignContent: ALIGNCONTENT.CENTER,
   },
   text: {
     fontSize: 18,
     marginLeft: 10,
-    color: 'black',
+    color: COLOR.BLACK,
   },
   icon: {
-    flexDirection: 'row',
-    marginTop: 20,
-    marginLeft: 20,
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    marginTop: MARGINTOP.TOP,
+    marginLeft: MARGINLIFT.LEFT,
   },
 });

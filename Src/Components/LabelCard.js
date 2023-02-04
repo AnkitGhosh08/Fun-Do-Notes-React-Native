@@ -4,24 +4,13 @@ import {TextInput} from 'react-native-gesture-handler';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {updateLabel} from '../Services/LableServices';
+import {FLEXDIRECTION} from '../Utility.js/Theme';
 
 const LabelCard = props => {
   const [edit, setEdit] = useState(false);
   const [update, setUpdate] = useState(props.label);
   const {user} = useContext(AuthContext);
   const userId = user.uid;
-  // console.log(userId);
-  //console.log(props, '1111');
-
-  //   const getData = async () => {
-  //     const output = await fetchingLabel(user.uid);
-  //     setUpdate(output);
-  //     //console.log(output);
-  //   };
-
-  //   const onDeletePress = async () => {
-  //     await deleteLabel(props.labelId, userId);
-  //   };
 
   const onHandelSavePress = async () => {
     await updateLabel(update, props.labelId, userId);
@@ -41,9 +30,6 @@ const LabelCard = props => {
         value={update}
         onChangeText={text => setUpdate(text)}
       />
-
-      {/* <Text style={styles.text}>{props.label}</Text> */}
-
       <View style={{justifyContent: 'flex-end'}}></View>
       <TouchableOpacity
         onPress={() => {
@@ -58,11 +44,10 @@ const LabelCard = props => {
 export default LabelCard;
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: FLEXDIRECTION.DIRECTION,
     margin: 12,
   },
   text: {
-    // fontWeight: 'bold',
     fontSize: 18,
     marginLeft: 20,
     flexGrow: 1,

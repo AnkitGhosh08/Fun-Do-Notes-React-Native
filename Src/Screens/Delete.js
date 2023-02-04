@@ -3,6 +3,7 @@ import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import Notecard from '../Components/NoteCard';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingNote} from '../Services/NoteServices';
+import {ALIGNCONTENT, ALIGNITEMS, JUSTIFYCONTENT} from '../Utility.js/Theme';
 
 const Delete = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -55,8 +56,8 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 8,
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignContent: ALIGNCONTENT.CENTER,
+    alignItems: ALIGNITEMS.ITEM,
+    justifyContent: JUSTIFYCONTENT.CENTER,
   },
 });

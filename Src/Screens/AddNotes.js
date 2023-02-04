@@ -12,18 +12,26 @@ import {AuthContext} from '../Navigations/AuthProvider';
 import {addNote, updateData} from '../Services/NoteServices';
 import BottomSheetModal from '../Components/BottomSheetModal';
 import BottomSheetReminder from '../Components/BottomSheetReminder';
-import PushNotification from 'react-native-push-notification';
+import ReminderNotifications from '../Services/ReminderNotifications';
+import moment from 'moment';
+import {
+  ALIGNITEMS,
+  COLOR,
+  FLEXDIRECTION,
+  FONTWEIGHT,
+  JUSTIFYCONTENT,
+  WIDTH,
+} from '../Utility.js/Theme';
+import {JumpingTransition} from 'react-native-reanimated';
 
 const Chip = ({children}) => <Text style={style.chipText}>{children}</Text>;
 
 const AddNotes = ({navigation, route}) => {
   let noteData = route.params;
-  //console.log('note data.....', noteData);
 
   const labelData = route.params?.labelData || [];
-  // console.log(labelData, '11111111');
-  const [date, setDate] = useState('');
-  const [text, setText] = useState('');
+
+  const [date, setDate] = useState(noteData?.editData?.reminderData || '');
   const [viewModal, setViewModal] = useState(false);
   const [modal, setModal] = useState(false);
   const [title, setTitle] = useState(noteData?.editData?.title || '');
@@ -39,12 +47,17 @@ const AddNotes = ({navigation, route}) => {
     noteData?.editData?.isDeleted || false,
   );
 
+  const timeAndDate = moment(date).format('LLLL');
+
   const {user} = useContext(AuthContext);
+
+  const receiveId = route.params?.id;
+
+  let noteId = receiveId || Date.now().toString().substring(0, 10);
 
   const onBackPress = async () => {
     let userId = user.uid;
-    let noteId = route.params?.id;
-    if (noteId) {
+    if (receiveId) {
       await updateData(
         title,
         note,
@@ -52,8 +65,8 @@ const AddNotes = ({navigation, route}) => {
         noteId,
         pinData,
         archiveData,
-        reminderData,
         deleteData,
+        date.toString(),
         labelData,
       );
     } else
@@ -63,10 +76,15 @@ const AddNotes = ({navigation, route}) => {
         userId,
         pinData,
         archiveData,
-        reminderData,
         deleteData,
+        date.toString(),
         labelData,
+        noteId,
       );
+
+    if (date) {
+      ReminderNotifications.setReminder(date, title, note, noteId);
+    }
     navigation.navigate('Home');
   };
 
@@ -77,13 +95,10 @@ const AddNotes = ({navigation, route}) => {
     setArchiveData(!archiveData);
   };
 
-  // const handelNotification = () => {
-  //   PushNotification.cancelAllLocalNotifications();
-  //   PushNotification.localNotification({
-  //     // title: item.note,
-  //     message: text,
-  //   });
-  // };
+  const handelCancelNotification = () => {
+    ReminderNotifications.cancelNotification(noteId);
+    setDate('');
+  };
 
   return (
     <View>
@@ -96,7 +111,7 @@ const AddNotes = ({navigation, route}) => {
           <Icons
             name={'pin-outline'}
             size={30}
-            color={pinData ? '#a507e3' : 'grey'}
+            color={pinData ? '#a507e3' : '#353336'}
           />
         </TouchableOpacity>
 
@@ -104,13 +119,11 @@ const AddNotes = ({navigation, route}) => {
           <TouchableOpacity
             style={style.bellIcon}
             onPress={() => setViewModal(!viewModal)}>
-            <Icons name={'bell-outline'} size={30} color="gray" />
+            <Icons name={'bell-outline'} size={30} color="#353336" />
           </TouchableOpacity>
           <BottomSheetReminder
             viewModal={viewModal}
             setViewModal={setViewModal}
-            text={text}
-            setText={setText}
             date={date}
             setDate={setDate}
             navigation={navigation}
@@ -121,18 +134,16 @@ const AddNotes = ({navigation, route}) => {
           <Icons
             name={'archive-arrow-down'}
             size={30}
-            color={archiveData ? '#a507e3' : 'gray'}
+            color={archiveData ? '#a507e3' : '#353336'}
           />
         </TouchableOpacity>
       </View>
-
       <TextInput
         style={style.text}
         placeholder="Title"
         value={title}
         onChangeText={value => setTitle(value)}
       />
-
       <TextInput
         style={style.textInput}
         placeholder="Note"
@@ -142,10 +153,12 @@ const AddNotes = ({navigation, route}) => {
       />
 
       <View style={style.reminderStyle}>
-        <TouchableOpacity>
-          <Text style={style.reminderText}>{text}</Text>
+        <Text style={style.reminderText}>{timeAndDate}</Text>
+        <TouchableOpacity onPress={() => handelCancelNotification()}>
+          <Icons name={'close'} size={30} color="#7a43ab" />
         </TouchableOpacity>
       </View>
+
       <View style={style.chipStyle}>
         <TouchableOpacity onPress={() => navigation.navigate('AddLabels')}>
           {labelData.map(labels => (
@@ -155,12 +168,31 @@ const AddNotes = ({navigation, route}) => {
       </View>
 
       <View>
-        <TouchableOpacity
-          style={style.dotsIcon}
-          onPress={() => setModal(!modal)}>
-          <Ionicons name={'ellipsis-vertical-sharp'} size={30} color="black" />
-        </TouchableOpacity>
+        <View style={style.dotsIcon}>
+          <TouchableOpacity>
+            <Ionicons name={'color-palette-sharp'} size={30} color="#353336" />
+          </TouchableOpacity>
+
+          <Text
+            style={{
+              color: 'black',
+              marginTop: 5,
+            }}>
+            {moment(Date.now()).format('LLL')}
+          </Text>
+
+          <TouchableOpacity
+            style={{marginLeft: 30}}
+            onPress={() => setModal(!modal)}>
+            <Ionicons
+              name={'ellipsis-vertical-sharp'}
+              size={30}
+              color="#353336"
+            />
+          </TouchableOpacity>
+        </View>
       </View>
+
       <View style={style.modalView}>
         <BottomSheetModal
           modal={modal}
@@ -176,10 +208,9 @@ export default AddNotes;
 
 const style = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    //backgroundColor:'black',
+    flexDirection: FLEXDIRECTION.DIRECTION,
     height: 40,
-    width: '100%',
+    width: WIDTH.FULL,
     marginTop: 20,
   },
   PinIcon: {
@@ -194,50 +225,49 @@ const style = StyleSheet.create({
   },
   textInput: {
     fontSize: 25,
-    width: '100%',
+    width: WIDTH.FULL,
     marginLeft: 20,
   },
   text: {
     marginTop: 20,
     hight: 20,
-    width: '100%',
+    width: WIDTH.FULL,
     marginLeft: 10,
     fontSize: 40,
-    fontWeight: 'bold',
+    fontWeight: FONTWEIGHT.WEIGHT,
   },
   dotsIcon: {
     marginTop: 500,
-    marginLeft: 350,
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    justifyContent: JUSTIFYCONTENT.EVENLY,
   },
   modalView: {
-    justifyContent: 'flex-end',
+    justifyContent: JUSTIFYCONTENT.END,
   },
   chipText: {
     borderRadius: 15,
-    //borderBottomRightRadius: 30,
-    //borderTopRightRadius: 30,
-    color: 'white',
-    backgroundColor: '#a507e3',
+    color: COLOR.APP_BACKGROUND,
+    backgroundColor: COLOR.ADD_ICON,
     fontSize: 14,
     padding: 10,
     margin: 10,
   },
   chipStyle: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    justifyContent: JUSTIFYCONTENT.CONTENT,
+    alignItems: ALIGNITEMS.ITEM,
   },
   reminderText: {
     borderRadius: 30,
-    color: 'black',
-    //backgroundColor: '#a507e3',
+    color: COLOR.APP_BACKGROUND,
+    backgroundColor: COLOR.ADD_ICON,
     fontSize: 14,
     padding: 10,
     margin: 10,
   },
   reminderStyle: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    justifyContent: JUSTIFYCONTENT.CONTENT,
+    alignItems: ALIGNITEMS.ITEM,
   },
 });

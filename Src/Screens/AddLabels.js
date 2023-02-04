@@ -12,9 +12,9 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingLabel} from '../Services/LableServices';
 import {useSelector, useDispatch} from 'react-redux';
+import {COLOR, FLEXDIRECTION} from '../Utility.js/Theme';
 
 const LabelCheck = ({data, onCheck, ifCheck}) => {
-  // console.log(data, '2333333333');
   return (
     <View style={{flexDirection: 'row', margin: 10}}>
       <Icons name={'label-outline'} size={30} color="#a507e3" />
@@ -41,20 +41,6 @@ const AddLabel = ({navigation}) => {
     const output = await fetchingLabel(user.uid);
     dispatch({type: 'LABELDATA', payload: output});
   };
-
-  // const [products, setProducts] = useState([]);
-
-  // const handleChange = id => {
-  //   let temp = products.map(product => {
-  //     console.log(products, '1111');
-  //     if (id === product.id) {
-  //       return {...product, isChecked: !product.isChecked};
-  //     }
-  //     return product;
-  //   });
-  //   setProducts(temp);
-  // };
-  //let selected = products.filter(product => product.isChecked);
 
   const onCheck = item => {
     const index = selectedLabel.indexOf(item);
@@ -87,7 +73,7 @@ const AddLabel = ({navigation}) => {
         />
       </View>
 
-      {newLabel.map(itm => (
+      {newLabel?.map(itm => (
         <LabelCheck
           data={itm}
           onCheck={onCheck}
@@ -101,26 +87,26 @@ const AddLabel = ({navigation}) => {
 export default AddLabel;
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: FLEXDIRECTION.DIRECTION,
     height: 60,
-    // backgroundColor: '#dac5e6',
     padding: 5,
   },
   icon: {
     margin: 10,
   },
   labelIcon: {
-    flexDirection: 'row',
+    flexDirection: FLEXDIRECTION.DIRECTION,
     marginTop: 20,
     marginLeft: 20,
   },
   text: {
     fontSize: 18,
     marginLeft: 10,
-    color: 'black',
+    color: COLOR.BLACK,
   },
   Checkbox: {
     marginLeft: 250,
-    color: '#dac5e6',
+    color: COLOR.TOPBAR_BACKGROUND,
+    //flexGrow: 1,
   },
 });

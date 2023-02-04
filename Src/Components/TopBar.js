@@ -7,17 +7,25 @@ import {useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../Navigations/AuthProvider';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector, useDispatch} from 'react-redux';
+import {
+  ALIGNITEMS,
+  BORDERRADIUS,
+  COLOR,
+  FLEXDIRECTION,
+  HIGHT,
+  JUSTIFYCONTENT,
+  PADDING,
+  WIDTH,
+} from '../Utility.js/Theme';
 
 const TopBar = () => {
   const navigation = useNavigation();
 
-  //const [toggle, setToggle] = useState(false);
   const [userData, setUserData] = useState({});
   const [viewModal, setViewModal] = useState(false);
   const [imageData, setImageData] = useState('');
 
   const {logout, user, fetchUser, updateUser} = useContext(AuthContext);
-  //console.log('111111111', user.uid)
 
   const toggle = useSelector(state => state.toggle);
   const dispatch = useDispatch();
@@ -30,8 +38,6 @@ const TopBar = () => {
     const userdetails = await fetchUser(user.uid);
     setUserData(userdetails);
   };
-
-  //console.log('checking...', userData.profilePicture)
 
   const choosePictureFromLibrary = () => {
     ImagePicker.openPicker({
@@ -79,7 +85,14 @@ const TopBar = () => {
       <TouchableOpacity
         style={styles.userIcon}
         onPress={() => setViewModal(true)}>
-        <Avatar.Image size={30} source={{uri: userData.profilePicture}} />
+        <Avatar.Image
+          size={30}
+          source={
+            imageData
+              ? {uri: userData.profilePicture}
+              : require('../assets/Avatar2.png')
+          }
+        />
       </TouchableOpacity>
       <View>
         <Modal
@@ -101,13 +114,14 @@ const TopBar = () => {
                   }}>
                   <Avatar.Image
                     size={70}
-                    source={{uri: userData.profilePicture}}
+                    source={
+                      imageData
+                        ? {uri: userData.profilePicture}
+                        : require('../assets/Avatar2.png')
+                    }
                   />
                 </TouchableOpacity>
               </View>
-              <Text style={{fontSize: 23, textAlign: 'center'}}>
-                {userData.name}
-              </Text>
               <TouchableOpacity onPress={() => logout()} style={styles.button}>
                 <Text style={styles.text}>Logout</Text>
               </TouchableOpacity>
@@ -122,71 +136,71 @@ export default TopBar;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    height: 45,
-    backgroundColor: '#dac5e6',
-    width: '100%',
-    borderRadius: 30,
-    justifyContent: 'space-around',
-    padding: 10,
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    height: HIGHT.INPUTTEXT,
+    backgroundColor: COLOR.TOPBAR_BACKGROUND,
+    width: WIDTH.FULL,
+    borderRadius: BORDERRADIUS.TOPBAR_RADIUS,
+    justifyContent: JUSTIFYCONTENT.AROUND,
+    padding: PADDING.TEXTINPUT,
   },
   barIcon: {
     marginRight: -5,
     marginLeft: 10,
   },
   userIcon: {
-    justifyContent: 'space-between',
+    justifyContent: JUSTIFYCONTENT.BETWEEN,
     marginLeft: 15,
   },
   grid: {
-    justifyContent: 'space-around',
+    justifyContent: JUSTIFYCONTENT.AROUND,
     marginLeft: 30,
   },
   SearchText: {
-    justifyContent: 'center',
+    justifyContent: JUSTIFYCONTENT.CENTER,
     fontSize: 18,
     marginLeft: 50,
   },
   HeadTitle: {
-    width: 300,
-    height: 300,
-    backgroundColor: '#ffffff',
+    width: WIDTH.MODAL_WIDHT,
+    height: WIDTH.MODAL_WIDHT,
+    backgroundColor: COLOR.APP_BACKGROUND,
     borderWidth: 2,
     borderRadius: 20,
   },
   centered_view: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: JUSTIFYCONTENT.CENTER,
+    alignItems: ALIGNITEMS.ITEM,
     backgroundColor: '#00000099',
   },
   modal: {
-    width: 300,
-    height: 300,
-    backgroundColor: '#dac5e6',
+    width: WIDTH.MODAL_WIDHT,
+    height: WIDTH.MODAL_WIDHT,
+    backgroundColor: COLOR.MODAL_BACKGROUND,
     borderWidth: 1,
     borderRadius: 20,
   },
   title: {
     height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ddb0f5',
+    justifyContent: JUSTIFYCONTENT.CENTER,
+    alignItems: ALIGNITEMS.ITEM,
+    backgroundColor: COLOR.MODAL_HEAD,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
   },
   body: {
     height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: JUSTIFYCONTENT.CENTER,
+    alignItems: ALIGNITEMS.ITEM,
   },
   button: {
-    backgroundColor: '#d259f7',
+    backgroundColor: COLOR.BUTTON_BACKGROUND,
     height: 40,
     width: 85,
     borderRadius: 20,
-    justifyContent: 'center',
-    alignSelf: 'center',
+    justifyContent: JUSTIFYCONTENT.CENTER,
+    alignSelf: ALIGNITEMS.ITEM,
     marginTop: 40,
   },
   text: {
@@ -196,7 +210,7 @@ const styles = StyleSheet.create({
   modalIcon: {
     marginTop: 20,
     marginLeft: 15,
-    flexDirection: 'row',
+    flexDirection: FLEXDIRECTION.DIRECTION,
     justifyContent: 'space-evenly',
   },
 });

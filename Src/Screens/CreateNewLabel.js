@@ -13,10 +13,10 @@ import {AuthContext} from '../Navigations/AuthProvider';
 import {addLabels, fetchingLabel, deleteLabel} from '../Services/LableServices';
 import LabelCard from '../Components/LabelCard';
 import {useSelector, useDispatch} from 'react-redux';
+import {FLEXDIRECTION, MAGIN, PADDING, WIDTH} from '../Utility.js/Theme';
 
 const CreateNewLabel = ({navigation}) => {
   const [label, setLabel] = useState();
-  // const [labelData, setLabelData] = useState([]);
   const [close, setClose] = useState(false);
 
   const dispatch = useDispatch();
@@ -28,10 +28,7 @@ const CreateNewLabel = ({navigation}) => {
   const getData = async () => {
     const output = await fetchingLabel(user.uid);
     dispatch({type: 'LABELDATA', payload: output});
-
-    // setLabelData(output);
   };
-  // console.log(newLabel, '11111');
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -91,7 +88,6 @@ const CreateNewLabel = ({navigation}) => {
       </View>
 
       <FlatList
-        // data={labelData}
         data={newLabel}
         keyExtractor={item => item.labelId}
         key={item => item.labelId}
@@ -113,28 +109,24 @@ const CreateNewLabel = ({navigation}) => {
 export default CreateNewLabel;
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: FLEXDIRECTION.DIRECTION,
     height: 60,
-    //backgroundColor: '#dac5e6',
-    padding: 5,
-    // backgroundColor: 'white',
+    padding: PADDING.LOGIN_TEXT,
   },
   icon: {
-    margin: 10,
+    margin: MAGIN.HALF,
   },
   text: {
-    margin: 10,
+    margin: MAGIN.HALF,
     fontSize: 20,
   },
   inputindex: {
-    flexDirection: 'row',
-    //backgroundColor: 'white',
+    flexDirection: FLEXDIRECTION.DIRECTION,
     borderWidth: 1,
-    width: '100%',
-    // borderColor: '#7a43ab',
+    width: WIDTH.FULL,
   },
   checkmark: {
     marginLeft: 170,
-    margin: 10,
+    margin: MAGIN.HALF,
   },
 });

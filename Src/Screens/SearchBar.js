@@ -1,7 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   TextInput,
   StyleSheet,
@@ -12,6 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingNote} from '../Services/NoteServices';
 import NoteCard from '../Components/NoteCard';
+import {COLOR, FLEXDIRECTION} from '../Utility.js/Theme';
 
 const SerachBar = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -75,10 +75,6 @@ const SerachBar = ({navigation}) => {
               }}>
               <NoteCard {...item} />
             </TouchableOpacity>
-            // <View>
-            //   <Text>{item.title}</Text>
-            //   <Text>{item.note}</Text>
-            // </View>
           );
         }}
       />
@@ -89,9 +85,9 @@ export default SerachBar;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: FLEXDIRECTION.DIRECTION,
     height: 50,
-    backgroundColor: '#dac5e6',
+    backgroundColor: COLOR.TOPBAR_BACKGROUND,
     borderRadius: 25,
     margin: 10,
   },

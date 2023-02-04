@@ -1,10 +1,15 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Chip} from 'react-native-paper';
+import {
+  ALIGNCONTENT,
+  BORDERRADIUS,
+  COLOR,
+  FLEXDIRECTION,
+  JUSTIFYCONTENT,
+} from '../Utility.js/Theme';
 
 const NoteCard = props => {
-  // console.log(props.labelData, '0000000');
-
   return (
     <View style={styles.container}>
       <View style={styles.title}>
@@ -33,11 +38,9 @@ export default NoteCard;
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 18,
+    borderRadius: BORDERRADIUS.BORDER_RADIUS,
     margin: 10,
-    // backgroundColor: 'white',
-    // borderBottomColor:'#d478f0',
-    borderColor: '#dac5e6',
+    borderColor: COLOR.TOPBAR_BACKGROUND,
     borderWidth: 3,
     paddingTop: 10,
     marginLeft: 10,
@@ -55,15 +58,13 @@ const styles = StyleSheet.create({
   },
   chipText: {
     borderRadius: 15,
-    //borderBottomRightRadius: 30,
-    //borderTopRightRadius: 30,
-    color: 'white',
+    color: COLOR.APP_BACKGROUND,
     backgroundColor: '#caa0e8',
     margin: 5,
   },
   chipStyle: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: FLEXDIRECTION.DIRECTION,
+    justifyContent: JUSTIFYCONTENT.CONTENT,
+    alignItems: ALIGNCONTENT.CENTER,
   },
 });

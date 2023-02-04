@@ -13,6 +13,14 @@ import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingNote} from '../Services/NoteServices';
 import NoteCard from '../Components/NoteCard';
 import {useSelector} from 'react-redux';
+import {
+  ALIGNCONTENT,
+  COLOR,
+  FLEX,
+  FONTWEIGHT,
+  JUSTIFYCONTENT,
+  WIDTH,
+} from '../Utility.js/Theme';
 
 const Home = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -34,8 +42,8 @@ const Home = ({navigation}) => {
         other.push(item);
       }
     });
-    // console.log(pin)
-    // console.log(other)
+    //console.log(pin);
+    //console.log(other);
 
     setNoteData(other);
     setPinData(pin);
@@ -85,9 +93,7 @@ const Home = ({navigation}) => {
   const header = ({section}) => {
     return (
       <View>
-        <Text style={{color: '#a507e3', fontWeight: 'bold', fontSize: 17}}>
-          {section.title}
-        </Text>
+        <Text style={styles.title}>{section.title}</Text>
       </View>
     );
   };
@@ -104,22 +110,6 @@ const Home = ({navigation}) => {
           renderSectionHeader={header}
           renderItem={renderItem}
         />
-        {/* <FlatList
-          data={noteData}
-          numColumns={2}
-          key={2}
-          keyExtractor={item => item.id}
-          scrollEnabled={false}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              style={toggle ? styles.grid : styles.list}
-              onPress={() => {
-                setToggle(!toggle);
-              }}>
-              <NoteCard {...item} />
-            </TouchableOpacity>
-          )}
-        /> */}
       </View>
       <View style={styles.bottom}>
         <BottomBar navigation={navigation} />
@@ -131,28 +121,32 @@ export default Home;
 
 const styles = StyleSheet.create({
   Container: {
-    flex: 1,
-    alignContent: 'center',
+    flex: FLEX.FLEX,
+    alignContent: ALIGNCONTENT.CENTER,
   },
   Top: {
-    justifyContent: 'flex-start',
+    justifyContent: JUSTIFYCONTENT.CONTENT,
     margin: 8,
   },
   bottom: {
-    justifyContent: 'flex-end',
+    justifyContent: JUSTIFYCONTENT.END,
   },
   middle: {
     flex: 2,
   },
   titleStyle: {
-    fontFamily: 'bold',
-    color: '#dac5e6',
+    fontFamily: FONTWEIGHT.WEIGHT,
+    color: COLOR.TOPBAR_BACKGROUND,
   },
   list: {
-    width: '100%',
+    width: WIDTH.FULL,
   },
-
   grid: {
-    width: '50%',
+    width: WIDTH.HALF,
+  },
+  title: {
+    color: COLOR.TITLE,
+    fontWeight: FONTWEIGHT.WEIGHT,
+    fontSize: 17,
   },
 });
