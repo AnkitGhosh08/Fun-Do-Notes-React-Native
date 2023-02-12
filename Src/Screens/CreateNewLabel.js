@@ -13,7 +13,7 @@ import {AuthContext} from '../Navigations/AuthProvider';
 import {addLabels, fetchingLabel, deleteLabel} from '../Services/LableServices';
 import LabelCard from '../Components/LabelCard';
 import {useSelector, useDispatch} from 'react-redux';
-import {FLEXDIRECTION, MAGIN, PADDING, WIDTH} from '../Utility.js/Theme';
+import {FLEXDIRECTION, MAGIN, PADDING, WIDTH} from '../Utility/Theme';
 
 const CreateNewLabel = ({navigation}) => {
   const [label, setLabel] = useState();

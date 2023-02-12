@@ -4,7 +4,13 @@ import {TextInput} from 'react-native-gesture-handler';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {updateLabel} from '../Services/LableServices';
-import {FLEXDIRECTION} from '../Utility.js/Theme';
+import {
+  FLEXDIRECTION,
+  FLEXGROW,
+  FONTSIZE,
+  MAGIN,
+  MARGINLIFT,
+} from '../Utility/Theme';
 
 const LabelCard = props => {
   const [edit, setEdit] = useState(false);
@@ -45,12 +51,12 @@ export default LabelCard;
 const styles = StyleSheet.create({
   container: {
     flexDirection: FLEXDIRECTION.DIRECTION,
-    margin: 12,
+    margin: MAGIN.LABEL,
   },
   text: {
-    fontSize: 18,
-    marginLeft: 20,
-    flexGrow: 1,
-    margin: -10,
+    fontSize: FONTSIZE.DRAWER_TEXT,
+    marginLeft: MARGINLIFT.LEFT,
+    flexGrow: FLEXGROW.ONE,
+    margin: MAGIN.LABEL_CARD,
   },
 });

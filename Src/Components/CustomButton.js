@@ -2,11 +2,13 @@ import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import {
   ALIGNITEMS,
+  BORDERRADIUS,
   COLOR,
   HIGHT,
   JUSTIFYCONTENT,
+  MARGINTOP,
   WIDTH,
-} from '../Utility.js/Theme';
+} from '../Utility/Theme';
 
 const CustomButton = ({buttonTitle, buttonOnClick}) => {
   return (
@@ -21,11 +23,11 @@ export default CustomButton;
 const styles = StyleSheet.create({
   button: {
     width: WIDTH.LOGINBUTTON,
-    borderRadius: 25,
+    borderRadius: BORDERRADIUS.BUTTON_RADIUS,
     height: HIGHT.BUTTON,
     alignItems: ALIGNITEMS.ITEM,
     justifyContent: JUSTIFYCONTENT.CENTER,
-    marginTop: 40,
+    marginTop: MARGINTOP.FULL,
     backgroundColor: COLOR.BUTTON_BACKGROUND,
     borderColor: COLOR.APP_BACKGROUND,
   },

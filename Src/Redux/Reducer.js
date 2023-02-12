@@ -1,6 +1,7 @@
 const initialState = {
   toggle: false,
   newLabel: [],
+  localization: false,
 };
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,6 +15,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         newLabel: action.payload,
       };
+
+    case 'LOCALIZATION':
+      return {
+        localization: !state.localization,
+      };
+
     default:
       return state;
   }

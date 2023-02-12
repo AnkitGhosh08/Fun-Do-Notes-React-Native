@@ -12,7 +12,7 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingLabel} from '../Services/LableServices';
 import {useSelector, useDispatch} from 'react-redux';
-import {COLOR, FLEXDIRECTION} from '../Utility.js/Theme';
+import {COLOR, FLEXDIRECTION} from '../Utility/Theme';
 
 const LabelCheck = ({data, onCheck, ifCheck}) => {
   return (

@@ -6,19 +6,22 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingLabel} from '../Services/LableServices';
 import {useSelector, useDispatch} from 'react-redux';
+import stringsOfLanguages from '../Utility/Localization';
 import {
   ALIGNCONTENT,
   ALIGNITEMS,
   COLOR,
   FLEX,
   FLEXDIRECTION,
+  FONTSIZE,
   MARGINLIFT,
   MARGINTOP,
-} from '../Utility.js/Theme';
+} from '../Utility/Theme';
 
 const CustomDrawer = ({props, navigation}) => {
-  const dispatch = useDispatch();
   const newLabel = useSelector(state => state.newLabel);
+  const localization = useSelector(state => state.localization);
+  const dispatch = useDispatch();
 
   const {user} = useContext(AuthContext);
 
@@ -32,7 +35,9 @@ const CustomDrawer = ({props, navigation}) => {
       <View style={styles.container}>
         <View>
           <Text style={{color: 'black', fontSize: 30, fontWeight: 'bold'}}>
-            Fun-DO Notes
+            {localization
+              ? stringsOfLanguages?._props.en.FunDoNotes
+              : stringsOfLanguages?._props.Hindi.FunDoNotes}
           </Text>
         </View>
 
@@ -41,7 +46,9 @@ const CustomDrawer = ({props, navigation}) => {
           onPress={() => navigation.navigate('Notes')}>
           <Icons name={'lightbulb-outline'} size={30} color="#a507e3" />
           <Text style={{fontSize: 20, color: 'black', marginLeft: 10}}>
-            Notes
+            {localization
+              ? stringsOfLanguages?._props.en.Notes
+              : stringsOfLanguages?._props.Hindi.Notes}
           </Text>
         </TouchableOpacity>
 
@@ -56,46 +63,56 @@ const CustomDrawer = ({props, navigation}) => {
               textAlign: 'center',
               marginLeft: 10,
             }}>
-            Reminders
+            {localization
+              ? stringsOfLanguages?._props.en.Reminders
+              : stringsOfLanguages?._props.Hindi.Reminders}
           </Text>
         </TouchableOpacity>
 
         <View style={{borderColor: '#a507e3', backgroundColor: '#e3d8f0'}}>
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <Text style={{marginLeft: 10, color: 'black', fontSize: 16}}>
-              Labels
+              {localization
+                ? stringsOfLanguages?._props.en.Labels
+                : stringsOfLanguages?._props.Hindi.Labels}
             </Text>
             <TouchableOpacity
               onPress={() => navigation.navigate('CreateNewLabel')}>
               <Text style={{marginLeft: 150, fontSize: 16, color: 'black'}}>
-                Edit
+                {localization
+                  ? stringsOfLanguages?._props.en.Edit
+                  : stringsOfLanguages?._props.Hindi.Edit}
               </Text>
             </TouchableOpacity>
           </View>
 
-          {newLabel?.map(item => (
-            <TouchableOpacity key={item.labelId}>
-              <View style={styles.icon}>
-                <Icons name={'label-outline'} size={25} color="#a507e3" />
-                <Text style={styles.text}> {item.label}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
+          <View>
+            {newLabel?.map(item => (
+              <TouchableOpacity key={item.labelId}>
+                <View style={styles.icon}>
+                  <Icons name={'label-outline'} size={25} color="#a507e3" />
+                  <Text style={styles.text}> {item.label}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
 
-          <TouchableOpacity
-            style={styles.labelIcon}
-            onPress={() => navigation.navigate('CreateNewLabel')}>
-            <Icons name={'plus'} size={30} color="#a507e3" />
-            <Text
-              style={{
-                fontSize: 18,
-                color: 'black',
-                textAlign: 'center',
-                marginLeft: 10,
-              }}>
-              Create new label
-            </Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.labelIcon}
+              onPress={() => navigation.navigate('CreateNewLabel')}>
+              <Icons name={'plus'} size={30} color="#a507e3" />
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: 'black',
+                  textAlign: 'center',
+                  marginLeft: 10,
+                }}>
+                {localization
+                  ? stringsOfLanguages?._props.en.Create_new_label
+                  : stringsOfLanguages?._props.Hindi.Create_new_label}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <TouchableOpacity
@@ -113,7 +130,9 @@ const CustomDrawer = ({props, navigation}) => {
               marginLeft: 10,
               textAlign: 'center',
             }}>
-            Archive
+            {localization
+              ? stringsOfLanguages?._props.en.Archive
+              : stringsOfLanguages?._props.Hindi.Archive}
           </Text>
         </TouchableOpacity>
 
@@ -128,7 +147,9 @@ const CustomDrawer = ({props, navigation}) => {
               marginLeft: 10,
               textAlign: 'center',
             }}>
-            Delete
+            {localization
+              ? stringsOfLanguages?._props.en.Delete
+              : stringsOfLanguages?._props.Hindi.Delete}
           </Text>
         </TouchableOpacity>
 
@@ -143,7 +164,9 @@ const CustomDrawer = ({props, navigation}) => {
               marginLeft: 10,
               textAlign: 'center',
             }}>
-            Settings
+            {localization
+              ? stringsOfLanguages?._props.en.settings
+              : stringsOfLanguages?._props.Hindi.settings}
           </Text>
         </TouchableOpacity>
       </View>
@@ -189,8 +212,8 @@ const styles = StyleSheet.create({
     alignContent: ALIGNCONTENT.CENTER,
   },
   text: {
-    fontSize: 18,
-    marginLeft: 10,
+    fontSize: FONTSIZE.DRAWER_TEXT,
+    marginLeft: MARGINLIFT.DRAWER_LEFT,
     color: COLOR.BLACK,
   },
   icon: {

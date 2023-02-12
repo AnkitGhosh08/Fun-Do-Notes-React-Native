@@ -259,6 +259,7 @@ dependencies {
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    //compile project(':react-native-localization') // localization
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

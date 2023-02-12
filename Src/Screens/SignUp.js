@@ -21,7 +21,7 @@ import {
   MARGINTOP,
   PADDING,
   WIDTH,
-} from '../Utility.js/Theme';
+} from '../Utility/Theme';
 
 const SignUp = () => {
   const [name, setName] = useState('');

@@ -22,7 +22,7 @@ const DrawerNavigation = () => {
       <Drawer.Screen name={'CreateNewLabel'} component={CreateNewLabel} />
       <Drawer.Screen name={'Archive'} component={Archive} />
       {/* <Drawer.Screen name={'Delete'} component={Delete} /> */}
-      <Drawer.Screen name={'settings'} component={Settings} />
+      <Drawer.Screen name={'Settings'} component={Settings} />
     </Drawer.Navigator>
   );
 };

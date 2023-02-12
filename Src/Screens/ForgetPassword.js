@@ -14,7 +14,7 @@ import {
   FONTWEIGHT,
   JUSTIFYCONTENT,
   WIDTH,
-} from '../Utility.js/Theme';
+} from '../Utility/Theme';
 
 const ForgetPassword = ({navigation}) => {
   const onSignIn = () => {

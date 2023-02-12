@@ -21,8 +21,7 @@ import {
   FONTWEIGHT,
   JUSTIFYCONTENT,
   WIDTH,
-} from '../Utility.js/Theme';
-import {JumpingTransition} from 'react-native-reanimated';
+} from '../Utility/Theme';
 
 const Chip = ({children}) => <Text style={style.chipText}>{children}</Text>;
 
@@ -121,6 +120,7 @@ const AddNotes = ({navigation, route}) => {
             onPress={() => setViewModal(!viewModal)}>
             <Icons name={'bell-outline'} size={30} color="#353336" />
           </TouchableOpacity>
+
           <BottomSheetReminder
             viewModal={viewModal}
             setViewModal={setViewModal}
@@ -138,12 +138,14 @@ const AddNotes = ({navigation, route}) => {
           />
         </TouchableOpacity>
       </View>
+
       <TextInput
         style={style.text}
         placeholder="Title"
         value={title}
         onChangeText={value => setTitle(value)}
       />
+
       <TextInput
         style={style.textInput}
         placeholder="Note"
@@ -152,12 +154,14 @@ const AddNotes = ({navigation, route}) => {
         onChangeText={value => setNote(value)}
       />
 
-      <View style={style.reminderStyle}>
-        <Text style={style.reminderText}>{timeAndDate}</Text>
-        <TouchableOpacity onPress={() => handelCancelNotification()}>
-          <Icons name={'close'} size={30} color="#7a43ab" />
-        </TouchableOpacity>
-      </View>
+      {date !== '' ? (
+        <View style={style.reminderStyle}>
+          <Text style={style.reminderText}>{timeAndDate}</Text>
+          <TouchableOpacity onPress={() => handelCancelNotification()}>
+            <Icons name={'close'} size={30} color="#7a43ab" />
+          </TouchableOpacity>
+        </View>
+      ) : null}
 
       <View style={style.chipStyle}>
         <TouchableOpacity onPress={() => navigation.navigate('AddLabels')}>
@@ -237,7 +241,7 @@ const style = StyleSheet.create({
     fontWeight: FONTWEIGHT.WEIGHT,
   },
   dotsIcon: {
-    marginTop: 500,
+    marginTop: 550,
     flexDirection: FLEXDIRECTION.DIRECTION,
     justifyContent: JUSTIFYCONTENT.EVENLY,
   },

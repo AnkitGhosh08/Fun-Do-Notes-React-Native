@@ -3,11 +3,17 @@ import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   ALIGNITEMS,
+  BORDERRADIUS,
+  BORDERWIDTH,
   COLOR,
   FLEXDIRECTION,
+  HIGHT,
   JUSTIFYCONTENT,
+  MARGINLIFT,
+  MARGINTOP,
+  PADDING,
   WIDTH,
-} from '../Utility.js/Theme';
+} from '../Utility/Theme';
 
 const BottomBar = ({navigation}) => {
   const HandelAddNote = () => {
@@ -54,24 +60,24 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.TOPBAR_BACKGROUND,
     flexDirection: FLEXDIRECTION.DIRECTION,
     width: WIDTH.FULL,
-    height: 50,
-    paddingHorizontal: 10,
+    height: HIGHT.BUTTON,
+    paddingHorizontal: PADDING.PLUS_ICON,
   },
   IconView: {
     justifyContent: JUSTIFYCONTENT.CENTER,
     alignItems: ALIGNITEMS.ITEM,
-    padding: 8,
-    marginLeft: 10,
+    padding: PADDING.ICON_VIEW,
+    marginLeft: MARGINLIFT.DRAWER_LEFT,
   },
   plusIcon: {
-    width: 70,
-    height: 70,
+    width: WIDTH.PLUS_ICON,
+    height: HIGHT.PLUS_ICON,
     backgroundColor: COLOR.TOPBAR_BACKGROUND,
-    marginLeft: 60,
-    borderRadius: 20,
-    borderWidth: 8,
+    marginLeft: MARGINLIFT.PLUS_ICON,
+    borderRadius: BORDERRADIUS.PLUS_ICON,
+    borderWidth: BORDERWIDTH.PLUS_ICON,
     borderColor: COLOR.APP_BACKGROUND,
-    marginTop: -40,
+    marginTop: MARGINTOP.PLUS_ICON,
     alignItems: ALIGNITEMS.ITEM,
   },
 });

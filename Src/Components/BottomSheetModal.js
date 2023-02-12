@@ -1,7 +1,17 @@
 import React from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {COLOR, FLEXDIRECTION, JUSTIFYCONTENT} from '../Utility.js/Theme';
+import {
+  BORDERRADIUS,
+  COLOR,
+  FLEX,
+  FLEXDIRECTION,
+  FONTSIZE,
+  JUSTIFYCONTENT,
+  MARGINLIFT,
+  MARGINTOP,
+  PADDING,
+} from '../Utility/Theme';
 
 const BottomSheetModal = ({navigation, modal, setModal, noteData}) => {
   return (
@@ -34,34 +44,34 @@ const BottomSheetModal = ({navigation, modal, setModal, noteData}) => {
 export default BottomSheetModal;
 const styles = StyleSheet.create({
   Container: {
-    flex: 1,
+    flex: FLEX.FLEX,
     justifyContent: JUSTIFYCONTENT.CENTER,
-    padding: 60,
-    marginTop: 50,
+    padding: PADDING.BS_BACKGROUND,
+    marginTop: MARGINTOP.BS_BACKGROUND,
   },
   background: {
     backgroundColor: COLOR.TOPBAR_BACKGROUND,
-    flex: 0.5,
-    padding: 40,
-    borderRadius: 10,
+    flex: FLEX.HALF,
+    padding: PADDING.BS_BACKGROUND,
+    borderRadius: BORDERRADIUS.BS_BACKGROUND,
   },
   icon: {
     flexDirection: FLEXDIRECTION.DIRECTION,
-    marginLeft: -20,
+    marginLeft: MARGINLIFT.MODAL_LEFT,
   },
   lebel: {
     flexDirection: FLEXDIRECTION.DIRECTION,
-    marginTop: 30,
-    marginLeft: -20,
+    marginTop: MARGINTOP.MIDDLE,
+    marginLeft: MARGINLIFT.MODAL_LEFT,
   },
   DeleteText: {
-    fontSize: 20,
+    fontSize: FONTSIZE.DELETE_TEXT,
     color: COLOR.GREY,
-    marginLeft: 15,
+    marginLeft: MARGINLIFT.DATE_TIME,
   },
   LabelText: {
-    fontSize: 18,
+    fontSize: FONTSIZE.DRAWER_TEXT,
     color: COLOR.GREY,
-    marginLeft: 15,
+    marginLeft: MARGINLIFT.DATE_TIME,
   },
 });

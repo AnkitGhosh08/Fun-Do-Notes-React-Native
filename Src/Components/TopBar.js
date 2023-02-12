@@ -1,5 +1,12 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Modal} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  Alert,
+} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import {Avatar} from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -7,16 +14,24 @@ import {useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../Navigations/AuthProvider';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector, useDispatch} from 'react-redux';
+import storage from '@react-native-firebase/storage';
+import stringsOfLanguages from '../Utility/Localization';
+
 import {
   ALIGNITEMS,
   BORDERRADIUS,
+  BORDERWIDTH,
   COLOR,
+  FLEX,
   FLEXDIRECTION,
+  FONTSIZE,
   HIGHT,
   JUSTIFYCONTENT,
+  MARGINLIFT,
+  MARGINRIGHT,
   PADDING,
   WIDTH,
-} from '../Utility.js/Theme';
+} from '../Utility/Theme';
 
 const TopBar = () => {
   const navigation = useNavigation();
@@ -24,9 +39,11 @@ const TopBar = () => {
   const [userData, setUserData] = useState({});
   const [viewModal, setViewModal] = useState(false);
   const [imageData, setImageData] = useState('');
-
+  const [uploading, setUploading] = useState(false);
+  const [urlOfImage, setUrlOfImage] = useState('');
   const {logout, user, fetchUser, updateUser} = useContext(AuthContext);
 
+  const localization = useSelector(state => state.localization);
   const toggle = useSelector(state => state.toggle);
   const dispatch = useDispatch();
 
@@ -39,12 +56,31 @@ const TopBar = () => {
     setUserData(userdetails);
   };
 
+  const uploadProfile = async image => {
+    const uploadUri = image;
+    let fileName = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
+    setUploading(true);
+    try {
+      await storage().ref(fileName).putFile(uploadUri);
+      setUploading(false);
+      const url = await storage().ref(fileName).getDownloadURL();
+      setUrlOfImage(url);
+      Alert.alert(
+        'Image Uploaded!',
+        'Your image has been uploaded to cloud storage',
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const choosePictureFromLibrary = () => {
     ImagePicker.openPicker({
       width: 50,
       height: 50,
       cropping: true,
     }).then(image => {
+      uploadProfile(image.path);
       console.log(image);
       updateUser(user.uid, image.path);
       setImageData(image.path);
@@ -70,7 +106,12 @@ const TopBar = () => {
         <FontAwesome name={'bars'} size={25} color={'#d259f7'} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('SearchBar')}>
-        <Text style={styles.SearchText}>Search your Notes</Text>
+        <Text style={styles.SearchText}>
+          {' '}
+          {localization
+            ? stringsOfLanguages?._props.en.Search_your_Notes
+            : stringsOfLanguages?._props.Hindi.Search_your_Notes}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.grid}
@@ -104,7 +145,11 @@ const TopBar = () => {
           <View style={styles.centered_view}>
             <View style={styles.modal}>
               <View style={styles.title}>
-                <Text style={styles.text}>Fun-Do-Notes</Text>
+                <Text style={styles.text}>
+                  {localization
+                    ? stringsOfLanguages?._props.en.FunDoNotes
+                    : stringsOfLanguages?._props.Hindi.FunDoNotes}
+                </Text>
               </View>
 
               <View style={styles.modalIcon}>
@@ -123,7 +168,12 @@ const TopBar = () => {
                 </TouchableOpacity>
               </View>
               <TouchableOpacity onPress={() => logout()} style={styles.button}>
-                <Text style={styles.text}>Logout</Text>
+                <Text style={styles.text}>
+                  {' '}
+                  {localization
+                    ? stringsOfLanguages?._props.en.Logout
+                    : stringsOfLanguages?._props.Hindi.Logout}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -145,44 +195,44 @@ const styles = StyleSheet.create({
     padding: PADDING.TEXTINPUT,
   },
   barIcon: {
-    marginRight: -5,
-    marginLeft: 10,
+    marginRight: MARGINRIGHT.BAR_ICON,
+    marginLeft: MARGINLIFT.DRAWER_LEFT,
   },
   userIcon: {
     justifyContent: JUSTIFYCONTENT.BETWEEN,
-    marginLeft: 15,
+    marginLeft: MARGINLIFT.DATE_TIME,
   },
   grid: {
     justifyContent: JUSTIFYCONTENT.AROUND,
-    marginLeft: 30,
+    marginLeft: MARGINLIFT.GRID,
   },
   SearchText: {
     justifyContent: JUSTIFYCONTENT.CENTER,
-    fontSize: 18,
-    marginLeft: 50,
+    fontSize: FONTSIZE.DRAWER_TEXT,
+    marginLeft: MARGINLIFT.BS_REMINDER,
   },
   HeadTitle: {
     width: WIDTH.MODAL_WIDHT,
     height: WIDTH.MODAL_WIDHT,
     backgroundColor: COLOR.APP_BACKGROUND,
-    borderWidth: 2,
-    borderRadius: 20,
+    borderWidth: BORDERWIDTH.MODAL,
+    borderRadius: BORDERRADIUS.PLUS_ICON,
   },
   centered_view: {
-    flex: 1,
+    flex: FLEX.FLEX,
     justifyContent: JUSTIFYCONTENT.CENTER,
     alignItems: ALIGNITEMS.ITEM,
-    backgroundColor: '#00000099',
+    backgroundColor: COLOR.MODAL_BG,
   },
   modal: {
     width: WIDTH.MODAL_WIDHT,
     height: WIDTH.MODAL_WIDHT,
     backgroundColor: COLOR.MODAL_BACKGROUND,
-    borderWidth: 1,
-    borderRadius: 20,
+    borderWidth: BORDERWIDTH.WIDTH_MODAL,
+    borderRadius: BORDERRADIUS.PLUS_ICON,
   },
   title: {
-    height: 50,
+    height: HIGHT.BUTTON,
     justifyContent: JUSTIFYCONTENT.CENTER,
     alignItems: ALIGNITEMS.ITEM,
     backgroundColor: COLOR.MODAL_HEAD,

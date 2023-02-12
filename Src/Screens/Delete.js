@@ -3,7 +3,7 @@ import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import Notecard from '../Components/NoteCard';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingNote} from '../Services/NoteServices';
-import {ALIGNCONTENT, ALIGNITEMS, JUSTIFYCONTENT} from '../Utility.js/Theme';
+import {ALIGNCONTENT, ALIGNITEMS, JUSTIFYCONTENT} from '../Utility/Theme';
 
 const Delete = ({navigation}) => {
   const {user} = useContext(AuthContext);

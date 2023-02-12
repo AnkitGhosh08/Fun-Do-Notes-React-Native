@@ -7,8 +7,10 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import SocialButton from '../Components/SocialButton';
 import {AuthContext} from '../Navigations/AuthProvider';
+import stringsOfLanguages from '../Utility/Localization';
 import {
   ALIGNITEMS,
   BORDERRADIUS,
@@ -24,13 +26,20 @@ import {
   MARGINTOP,
   PADDING,
   WIDTH,
-} from '../Utility.js/Theme';
+} from '../Utility/Theme';
 
 const Login = ({navigation}) => {
+  //console.log(stringsOfLanguages, '11111111');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const {login, googleLogin} = useContext(AuthContext);
+
+  // const toggle = useSelector(state => state.toggle);
+  // const dispatch = useDispatch();
+
+  const localization = useSelector(state => state.localization);
 
   const Validation = () => {
     let regxEmail = /^[A-Za-z0-9+_.-]+@(.+)$/;
@@ -72,8 +81,9 @@ const Login = ({navigation}) => {
           uri: 'https://cdn.dribbble.com/users/1224589/screenshots/16105004/app-icon-book.jpg',
         }}
       />
-
-      <Text style={styles.text}>Fun-Do-Notes</Text>
+      <TouchableOpacity>
+        <Text style={styles.text}>Fun DO Notes</Text>
+      </TouchableOpacity>
 
       <View style={styles.inputView}>
         <TextInput
@@ -173,7 +183,7 @@ const styles = StyleSheet.create({
   },
   signupButton: {
     fontSize: FONTSIZE.SIGNUPBUTTON,
-    marginTop: MARGINTOP.FULL,
+    marginTop: MARGINTOP.TOP,
   },
   textFailed: {
     color: COLOR.RED,

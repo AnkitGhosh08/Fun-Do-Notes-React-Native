@@ -13,14 +13,17 @@ import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingNote} from '../Services/NoteServices';
 import NoteCard from '../Components/NoteCard';
 import {useSelector} from 'react-redux';
+import stringsOfLanguages from '../Utility/Localization';
 import {
   ALIGNCONTENT,
   COLOR,
   FLEX,
+  FONTSIZE,
   FONTWEIGHT,
   JUSTIFYCONTENT,
+  MAGIN,
   WIDTH,
-} from '../Utility.js/Theme';
+} from '../Utility/Theme';
 
 const Home = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -28,6 +31,7 @@ const Home = ({navigation}) => {
   const [noteData, setNoteData] = useState([]);
 
   const toggle = useSelector(state => state.toggle);
+  const localization = useSelector(state => state.localization);
 
   const getData = async () => {
     const data = await fetchingNote(user.uid);
@@ -42,9 +46,6 @@ const Home = ({navigation}) => {
         other.push(item);
       }
     });
-    //console.log(pin);
-    //console.log(other);
-
     setNoteData(other);
     setPinData(pin);
   };
@@ -65,8 +66,18 @@ const Home = ({navigation}) => {
   };
 
   const section = [
-    {title: 'PINNED', data: [{list: pinData}]},
-    {title: 'others', data: [{list: noteData}]},
+    {
+      title: localization
+        ? stringsOfLanguages?._props.en.PINNED
+        : stringsOfLanguages?._props.Hindi.PINNED,
+      data: [{list: pinData}],
+    },
+    {
+      title: localization
+        ? stringsOfLanguages?._props.en.OTHERS
+        : stringsOfLanguages?._props.Hindi.OTHERS,
+      data: [{list: noteData}],
+    },
   ];
 
   const renderItem = ({item}) => {
@@ -91,13 +102,14 @@ const Home = ({navigation}) => {
   };
 
   const header = ({section}) => {
-    return (
-      <View>
-        <Text style={styles.title}>{section.title}</Text>
-      </View>
-    );
+    if (pinData?.length) {
+      return (
+        <View>
+          <Text style={styles.title}>{section.title}</Text>
+        </View>
+      );
+    }
   };
-
   return (
     <View style={styles.Container}>
       <View style={styles.Top}>
@@ -111,6 +123,7 @@ const Home = ({navigation}) => {
           renderItem={renderItem}
         />
       </View>
+
       <View style={styles.bottom}>
         <BottomBar navigation={navigation} />
       </View>
@@ -126,13 +139,13 @@ const styles = StyleSheet.create({
   },
   Top: {
     justifyContent: JUSTIFYCONTENT.CONTENT,
-    margin: 8,
+    margin: MAGIN.TOP,
   },
   bottom: {
     justifyContent: JUSTIFYCONTENT.END,
   },
   middle: {
-    flex: 2,
+    flex: FLEX.DOUBLE,
   },
   titleStyle: {
     fontFamily: FONTWEIGHT.WEIGHT,
@@ -147,6 +160,6 @@ const styles = StyleSheet.create({
   title: {
     color: COLOR.TITLE,
     fontWeight: FONTWEIGHT.WEIGHT,
-    fontSize: 17,
+    fontSize: FONTSIZE.HOME_TITLE,
   },
 });

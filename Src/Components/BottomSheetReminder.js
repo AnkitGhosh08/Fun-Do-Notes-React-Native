@@ -3,7 +3,18 @@ import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
-import {COLOR, FLEXDIRECTION, JUSTIFYCONTENT} from '../Utility.js/Theme';
+import {
+  BORDERRADIUS,
+  COLOR,
+  FLEX,
+  FLEXDIRECTION,
+  FONTSIZE,
+  JUSTIFYCONTENT,
+  MAGIN,
+  MARGINLIFT,
+  MARGINTOP,
+  PADDING,
+} from '../Utility/Theme';
 
 const BottomSheetReminder = ({
   navigation,
@@ -31,16 +42,16 @@ const BottomSheetReminder = ({
     setShow(false);
 
     const currentDate = selectedDate || date;
-    let tempDate = new Date(currentDate);
+    //let tempDate = new Date(currentDate);
 
     let fullDate =
-      tempDate.getDate() +
-      '/' +
-      (tempDate.getMonth() + 1) +
-      '/' +
-      tempDate.getFullYear();
-    let fullTime = '' + tempDate.getHours() + ' : ' + tempDate.getMinutes();
-    setDate(currentDate);
+      //   tempDate.getDate() +
+      //   '/' +
+      //   (tempDate.getMonth() + 1) +
+      //   '/' +
+      //   tempDate.getFullYear();
+      // let fullTime = '' + tempDate.getHours() + ' : ' + tempDate.getMinutes();
+      setDate(currentDate);
   };
 
   const showMode = currentMode => {
@@ -107,30 +118,30 @@ const BottomSheetReminder = ({
 export default BottomSheetReminder;
 const styles = StyleSheet.create({
   Container: {
-    flex: 1,
+    flex: FLEX.FLEX,
     justifyContent: JUSTIFYCONTENT.CENTER,
-    padding: 50,
-    marginTop: 50,
+    padding: PADDING.BS_REMINDER,
+    marginTop: MARGINTOP.BS_REMINDER,
   },
   background: {
     backgroundColor: COLOR.TOPBAR_BACKGROUND,
-    flex: 0.5,
-    padding: 40,
-    borderRadius: 10,
+    flex: FLEX.HALF,
+    padding: PADDING.BS_BACKGROUND,
+    borderRadius: BORDERRADIUS.BS_BACKGROUND,
   },
   icon: {
     flexDirection: FLEXDIRECTION.DIRECTION,
-    marginLeft: -20,
-    margin: 10,
+    marginLeft: MARGINLIFT.MODAL_LEFT,
+    margin: MAGIN.HALF,
   },
   lebel: {
     flexDirection: FLEXDIRECTION.DIRECTION,
-    marginTop: 30,
-    marginLeft: -20,
+    marginTop: MARGINTOP.MIDDLE,
+    marginLeft: MARGINLIFT.MODAL_LEFT,
   },
   text: {
-    fontSize: 18,
-    color: '#353336',
-    marginLeft: 15,
+    fontSize: FONTSIZE.DRAWER_TEXT,
+    color: COLOR.ICON_COLOR,
+    marginLeft: MARGINLIFT.DATE_TIME,
   },
 });

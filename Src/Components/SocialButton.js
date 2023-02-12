@@ -3,12 +3,18 @@ import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {
   ALIGNITEMS,
+  BORDERRADIUS,
   COLOR,
+  FLEX,
   FLEXDIRECTION,
+  FONTSIZE,
   FONTWEIGHT,
+  HIGHT,
   JUSTIFYCONTENT,
+  MARGINTOP,
+  PADDING,
   WIDTH,
-} from '../Utility.js/Theme';
+} from '../Utility/Theme';
 
 const SocialButton = ({buttonTitle, onPress}) => {
   return (
@@ -18,7 +24,7 @@ const SocialButton = ({buttonTitle, onPress}) => {
           name={'google'}
           style={styles.icon}
           size={22}
-          color={'white'}
+          color={COLOR.APP_BACKGROUND}
         />
       </View>
 
@@ -33,27 +39,27 @@ export default SocialButton;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginTop: 10,
-    borderRadius: 25,
+    marginTop: MARGINTOP.NOTE_CARD,
+    borderRadius: BORDERRADIUS.BUTTON_RADIUS,
     width: WIDTH.LOGINBUTTON,
-    height: 50,
-    padding: 10,
+    height: HIGHT.BUTTON,
+    padding: PADDING.TEXTINPUT,
     flexDirection: FLEXDIRECTION.DIRECTION,
-    marginTop: 40,
+    marginTop: MARGINTOP.FULL,
     backgroundColor: COLOR.SOCIAL_BUTTON,
   },
   icon: {
-    width: 30,
+    width: WIDTH.ICON,
     justifyContent: JUSTIFYCONTENT.CENTER,
     alignItems: JUSTIFYCONTENT.CENTER,
   },
   btnTxt: {
-    flex: 1,
+    flex: FLEX.FLEX,
     justifyContent: JUSTIFYCONTENT.CENTER,
     alignItems: ALIGNITEMS.ITEM,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: FONTSIZE.DRAWER_TEXT,
     fontWeight: FONTWEIGHT.WEIGHT,
   },
   text: {

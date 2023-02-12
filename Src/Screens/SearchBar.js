@@ -11,7 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../Navigations/AuthProvider';
 import {fetchingNote} from '../Services/NoteServices';
 import NoteCard from '../Components/NoteCard';
-import {COLOR, FLEXDIRECTION} from '../Utility.js/Theme';
+import {COLOR, FLEXDIRECTION} from '../Utility/Theme';
 
 const SerachBar = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -31,12 +31,12 @@ const SerachBar = ({navigation}) => {
   }, []);
 
   const updateSearch = text => {
-    setOutPut(text);
     const filtered = searchData.filter(
       data =>
         data.title.toLowerCase().includes(text.toLowerCase()) ||
         data.note.toLowerCase().includes(text.toLowerCase()),
     );
+    setOutPut(text);
     setSearchData(filtered);
   };
 

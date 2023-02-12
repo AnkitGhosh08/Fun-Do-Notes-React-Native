@@ -4,19 +4,30 @@ import {Chip} from 'react-native-paper';
 import {
   ALIGNCONTENT,
   BORDERRADIUS,
+  BORDERWIDTH,
   COLOR,
   FLEXDIRECTION,
+  FONTSIZE,
+  FONTWEIGHT,
   JUSTIFYCONTENT,
-} from '../Utility.js/Theme';
+  MAGIN,
+  MARGINBOTTON,
+  MARGINLIFT,
+  MARGINRIGHT,
+  MARGINTOP,
+  PADDINGBOTTOM,
+  PADDINGHORIZONTAL,
+  PADDINGTOP,
+} from '../Utility/Theme';
 
 const NoteCard = props => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Text style={{fontWeight: 'bold', fontSize: 18}}>{props.title}</Text>
+        <Text style={styles.title}>{props.title}</Text>
       </View>
       <View style={styles.note}>
-        <Text style={{fontSize: 15}}>{props.note}</Text>
+        <Text style={styles.note}>{props.note}</Text>
       </View>
       <View style={styles.chipStyle}>
         {props.labelData?.map(labels => (
@@ -39,32 +50,39 @@ export default NoteCard;
 const styles = StyleSheet.create({
   container: {
     borderRadius: BORDERRADIUS.BORDER_RADIUS,
-    margin: 10,
+    margin: MAGIN.HALF,
     borderColor: COLOR.TOPBAR_BACKGROUND,
-    borderWidth: 3,
-    paddingTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    paddingHorizontal: 15,
+    borderWidth: BORDERWIDTH.NOTE_CARD,
+    paddingTop: PADDINGTOP.NOTE_CARD,
+    marginLeft: MARGINLIFT.DRAWER_LEFT,
+    marginRight: MARGINRIGHT.NOTE_CARD,
+    marginTop: MARGINTOP.NOTE_CARD,
+    paddingHorizontal: PADDINGHORIZONTAL.NOTE_CARD,
   },
   title: {
-    marginTop: 3,
-    marginBottom: 9,
-    paddingBottom: 7,
+    marginTop: MARGINTOP.NOTE_CARD_TITLE,
+    marginBottom: MARGINBOTTON.NOTE_CARD_TITLE,
+    paddingBottom: PADDINGBOTTOM.NOTE_CARD,
   },
   note: {
-    bottom: 10,
+    bottom: PADDINGBOTTOM.NOTE_CARD,
   },
   chipText: {
-    borderRadius: 15,
+    borderRadius: BORDERRADIUS.NOTE_CARD,
     color: COLOR.APP_BACKGROUND,
-    backgroundColor: '#caa0e8',
-    margin: 5,
+    backgroundColor: COLOR.CHIP_CARD,
+    margin: MAGIN.NOTE_CARD,
   },
   chipStyle: {
     flexDirection: FLEXDIRECTION.DIRECTION,
     justifyContent: JUSTIFYCONTENT.CONTENT,
     alignItems: ALIGNCONTENT.CENTER,
+  },
+  title: {
+    fontWeight: FONTWEIGHT.WEIGHT,
+    fontSize: FONTSIZE.DRAWER_TEXT,
+  },
+  note: {
+    fontSize: FONTSIZE.NOTE_TEXT,
   },
 });
