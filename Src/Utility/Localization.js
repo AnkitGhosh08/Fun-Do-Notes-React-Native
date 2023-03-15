@@ -9,8 +9,6 @@ const stringsOfLanguages = new LocalizedStrings({
     password: 'Password',
     signin: 'Sign In',
     signingoogle: 'Sign In With Google',
-    showpass: 'Show Password',
-    createone: 'Create One',
     createanewccount: 'Create An Account',
     name: 'Name',
     confirmpass: 'Confirm Password',

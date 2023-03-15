@@ -103,7 +103,7 @@ const TopBar = () => {
         onPress={() => {
           navigation.openDrawer();
         }}>
-        <FontAwesome name={'bars'} size={25} color={'#d259f7'} />
+        <FontAwesome name={'bars'} size={25} color={'#7586f0'} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('SearchBar')}>
         <Text style={styles.SearchText}>
@@ -119,7 +119,7 @@ const TopBar = () => {
         <Icons
           name={toggle ? 'view-agenda-outline' : 'view-grid-outline'}
           size={25}
-          color={'#d259f7'}
+          color={'#7586f0'}
         />
       </TouchableOpacity>
 
@@ -248,14 +248,16 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.BUTTON_BACKGROUND,
     height: 40,
     width: 85,
-    borderRadius: 20,
+    borderRadius: 10,
     justifyContent: JUSTIFYCONTENT.CENTER,
     alignSelf: ALIGNITEMS.ITEM,
     marginTop: 40,
+    marginRight: -10,
   },
   text: {
     textAlign: 'center',
     fontSize: 20,
+    color: 'white',
   },
   modalIcon: {
     marginTop: 20,

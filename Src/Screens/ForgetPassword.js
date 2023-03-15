@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import {AuthContext} from '../Navigations/AuthProvider';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   ALIGNITEMS,
   COLOR,
@@ -35,15 +36,20 @@ const ForgetPassword = ({navigation}) => {
       <TextInput
         style={styles.textView}
         placeholder="Enter your email."
-        placeholderTextColor="#003f5c"
+        placeholderTextColor="white"
         onChangeText={text => setEmail(text)}
         value={email}
       />
-      <TouchableOpacity
-        style={styles.btton}
-        onPress={() => forgetPassword(email)}>
-        <Text>ForgetPassword</Text>
-      </TouchableOpacity>
+      <LinearGradient
+        colors={['#74ddf7', '#4058f5', '#b940f5']}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        locations={[0, 0.7, 0.9]}
+        style={styles.btton}>
+        <TouchableOpacity onPress={() => forgetPassword(email)}>
+          <Text>ForgetPassword</Text>
+        </TouchableOpacity>
+      </LinearGradient>
     </View>
   );
 };
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
   },
   textView: {
     backgroundColor: COLOR.TEXTINPUT_BACKGROUND,
-    borderRadius: 30,
+    borderRadius: 10,
     width: '70%',
     height: 45,
     marginBottom: 2,
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: ALIGNITEMS.ITEM,
     justifyContent: JUSTIFYCONTENT.CENTER,
     width: WIDTH.LOGINBUTTON,
-    borderRadius: 25,
+    borderRadius: 10,
     height: 50,
     marginTop: 40,
     backgroundColor: COLOR.BUTTON_BACKGROUND,

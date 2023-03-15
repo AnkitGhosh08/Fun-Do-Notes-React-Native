@@ -44,7 +44,7 @@ const CustomDrawer = ({props, navigation}) => {
         <TouchableOpacity
           style={styles.notesIcon}
           onPress={() => navigation.navigate('Notes')}>
-          <Icons name={'lightbulb-outline'} size={30} color="#a507e3" />
+          <Icons name={'lightbulb-outline'} size={30} color="#7586f0" />
           <Text style={{fontSize: 20, color: 'black', marginLeft: 10}}>
             {localization
               ? stringsOfLanguages?._props.en.Notes
@@ -55,7 +55,7 @@ const CustomDrawer = ({props, navigation}) => {
         <TouchableOpacity
           style={styles.reminderIcon}
           onPress={() => navigation.navigate('Reminders')}>
-          <Icons name={'bell-outline'} size={30} color="#a507e3" />
+          <Icons name={'bell-outline'} size={30} color="#7586f0" />
           <Text
             style={{
               fontSize: 18,
@@ -69,7 +69,7 @@ const CustomDrawer = ({props, navigation}) => {
           </Text>
         </TouchableOpacity>
 
-        <View style={{borderColor: '#a507e3', backgroundColor: '#e3d8f0'}}>
+        <View style={{borderColor: '#a507e3', backgroundColor: '#dcdef5'}}>
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <Text style={{marginLeft: 10, color: 'black', fontSize: 16}}>
               {localization
@@ -90,7 +90,7 @@ const CustomDrawer = ({props, navigation}) => {
             {newLabel?.map(item => (
               <TouchableOpacity key={item.labelId}>
                 <View style={styles.icon}>
-                  <Icons name={'label-outline'} size={25} color="#a507e3" />
+                  <Icons name={'label-outline'} size={25} color="#7586f0" />
                   <Text style={styles.text}> {item.label}</Text>
                 </View>
               </TouchableOpacity>
@@ -99,7 +99,7 @@ const CustomDrawer = ({props, navigation}) => {
             <TouchableOpacity
               style={styles.labelIcon}
               onPress={() => navigation.navigate('CreateNewLabel')}>
-              <Icons name={'plus'} size={30} color="#a507e3" />
+              <Icons name={'plus'} size={30} color="#7586f0" />
               <Text
                 style={{
                   fontSize: 18,
@@ -121,7 +121,7 @@ const CustomDrawer = ({props, navigation}) => {
           <Icons
             name={'archive-arrow-down-outline'}
             size={30}
-            color="#a507e3"
+            color="#7586f0"
           />
           <Text
             style={{
@@ -139,7 +139,7 @@ const CustomDrawer = ({props, navigation}) => {
         <TouchableOpacity
           style={styles.archiveIcon}
           onPress={() => navigation.navigate('Archive')}>
-          <Icons name={'delete'} size={30} color="#a507e3" />
+          <Icons name={'delete'} size={30} color="#7586f0" />
           <Text
             style={{
               fontSize: 18,
@@ -156,7 +156,7 @@ const CustomDrawer = ({props, navigation}) => {
         <TouchableOpacity
           style={styles.settingIcon}
           onPress={() => navigation.navigate('Settings')}>
-          <Ionicons name="settings-outline" size={30} color={'#a507e3'} />
+          <Ionicons name="settings-outline" size={30} color={'#7586f0'} />
           <Text
             style={{
               fontSize: 18,

@@ -24,22 +24,22 @@ const BottomBar = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.IconView}>
         <TouchableOpacity>
-          <Icons name={'checkbox-marked'} size={30} color="#a507e3" />
+          <Icons name={'checkbox-marked'} size={30} color="#7586f0" />
         </TouchableOpacity>
       </View>
       <View style={styles.IconView}>
         <TouchableOpacity>
-          <Icons name={'brush'} size={30} color="#a507e3" />
+          <Icons name={'brush'} size={30} color="#7586f0" />
         </TouchableOpacity>
       </View>
       <View style={styles.IconView}>
         <TouchableOpacity>
-          <Icons name={'microphone-outline'} size={30} color="#a507e3" />
+          <Icons name={'microphone-outline'} size={30} color="#7586f0" />
         </TouchableOpacity>
       </View>
       <View style={styles.IconView}>
         <TouchableOpacity>
-          <Icons name={'image-outline'} size={30} color="#a507e3" />
+          <Icons name={'image-outline'} size={30} color="#7586f0" />
         </TouchableOpacity>
       </View>
       <View style={styles.plusIcon}>
@@ -47,7 +47,7 @@ const BottomBar = ({navigation}) => {
           onPress={() => {
             HandelAddNote();
           }}>
-          <Icons name={'plus'} size={50} color="#a507e3" />
+          <Icons name={'plus'} size={50} color="#7586f0" />
         </TouchableOpacity>
       </View>
     </View>

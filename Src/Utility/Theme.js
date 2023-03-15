@@ -1,16 +1,16 @@
 export const COLOR = {
-  TEXTINPUT_BACKGROUND: '#c781e3',
-  BUTTON_BACKGROUND: '#a507e3',
+  TEXTINPUT_BACKGROUND: '#7586f0',
+  BUTTON_BACKGROUND: '#7586f0',
   APP_BACKGROUND: '#fff',
   RED: 'red',
-  TOPBAR_BACKGROUND: '#dac5e6',
-  MODAL_BACKGROUND: '#dac5e6',
-  MODAL_HEAD: '#ddb0f5',
+  TOPBAR_BACKGROUND: '#c9cff5',
+  MODAL_BACKGROUND: '#c9cff5',
+  MODAL_HEAD: '#7586f0',
   GREY: '#353336',
-  SOCIAL_BUTTON: 'rgba(199, 36, 36,0.5)',
+  SOCIAL_BUTTON: '#fc4c4c',
   BLACK: 'black',
   ADD_ICON: '#a507e3',
-  TITLE: '#a507e3',
+  TITLE: '#7586f0',
   SIGNUP: '#2e0640',
   ICON_COLOR: '#353336',
   CHIP_CARD: '#caa0e8',
@@ -49,14 +49,14 @@ export const HIGHT = {
   MODAL_HIGHT: 300,
   BUTTON: 50,
   INPUTTEXT: 45,
-  FORGETBUTTON: 30,
+  FORGETBUTTON: 20,
   PLUS_ICON: 70,
 };
 
 export const WIDTH = {
   IMAGE_WIDHT: 250,
   TEXTINPUT: '70%',
-  LOGINBUTTON: '80%',
+  LOGINBUTTON: '73%',
   FULL: '100%',
   HALF: '50%',
   MODAL_WIDHT: 300,
@@ -67,7 +67,7 @@ export const WIDTH = {
 export const BORDERRADIUS = {
   TOPBAR_RADIUS: 30,
   BORDER_RADIUS: 18,
-  BUTTON_RADIUS: 25,
+  BUTTON_RADIUS: 15,
   BS_BACKGROUND: 10,
   PLUS_ICON: 20,
   NOTE_CARD: 15,
@@ -78,7 +78,7 @@ export const ALIGNCONTENT = {
 
 export const MARGINTOP = {
   TOP: 20,
-  FULL: 40,
+  FULL: 20,
   MIDDLE: 30,
   PLUS_ICON: -40,
   NOTE_CARD: 10,
@@ -95,7 +95,7 @@ export const MARGINLIFT = {
 };
 
 export const MARGINBOTTON = {
-  BOTTOM: 20,
+  BOTTOM: 10,
   FULL: 40,
   LOGIN_TEXT: 2,
   NOTE_CARD_TITLE: 3,

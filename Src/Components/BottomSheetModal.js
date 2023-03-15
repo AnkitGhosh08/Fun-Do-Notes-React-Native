@@ -35,6 +35,12 @@ const BottomSheetModal = ({navigation, modal, setModal, noteData}) => {
               <Icons name={'label-outline'} size={30} color="#353336" />
               <Text style={styles.LabelText}>Labels</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.lebel}
+              onPress={() => navigation.navigate('Formula', {noteData})}>
+              <Icons name={'math-tan'} size={30} color="#353336" />
+              <Text style={styles.LabelText}>Math</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>

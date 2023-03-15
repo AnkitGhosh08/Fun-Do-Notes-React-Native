@@ -17,9 +17,7 @@ export const reducer = (state = initialState, action) => {
       };
 
     case 'LOCALIZATION':
-      return {
-        localization: !state.localization,
-      };
+      return {...state, localization: !state.localization};
 
     default:
       return state;

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {AuthContext} from '../Navigations/AuthProvider';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   ALIGNITEMS,
   BORDERRADIUS,
@@ -38,7 +39,7 @@ const SignUp = () => {
         <TextInput
           style={styles.TextInput}
           placeholder="Name"
-          placeholderTextColor="#003f5c"
+          placeholderTextColor="white"
           onChangeText={text => setName(text)}
         />
       </View>
@@ -47,7 +48,7 @@ const SignUp = () => {
         <TextInput
           style={styles.TextInput}
           placeholder="Email"
-          placeholderTextColor="#003f5c"
+          placeholderTextColor="white"
           value={email}
           onChangeText={text => setEmail(text)}
         />
@@ -57,7 +58,7 @@ const SignUp = () => {
         <TextInput
           style={styles.TextInput}
           placeholder="Password"
-          placeholderTextColor="#003f5c"
+          placeholderTextColor="white"
           secureTextEntry={true}
           value={password}
           onChangeText={text => setPassword(text)}
@@ -68,17 +69,21 @@ const SignUp = () => {
         <TextInput
           style={styles.TextInput}
           placeholder="confirm password"
-          placeholderTextColor="#003f5c"
+          placeholderTextColor="white"
           secureTextEntry={true}
           onChangeText={confirmPassword => setConfirmPassword(confirmPassword)}
         />
       </View>
-
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => register(name, email, password)}>
-        <Text style={styles.Button}>Register</Text>
-      </TouchableOpacity>
+      <LinearGradient
+        colors={['#74ddf7', '#4058f5', '#b940f5']}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        locations={[0, 0.7, 0.9]}
+        style={styles.loginBtn}>
+        <TouchableOpacity onPress={() => register(name, email, password)}>
+          <Text style={styles.Button}>Register</Text>
+        </TouchableOpacity>
+      </LinearGradient>
     </View>
   );
 };
@@ -99,10 +104,12 @@ const styles = StyleSheet.create({
   },
   inputView: {
     backgroundColor: COLOR.TEXTINPUT_BACKGROUND,
-    borderRadius: BORDERRADIUS.TOPBAR_RADIUS,
+    // borderRadius: BORDERRADIUS.TOPBAR_RADIUS,
     width: WIDTH.TEXTINPUT,
     height: HIGHT.INPUTTEXT,
     marginBottom: MARGINBOTTON.BOTTOM,
+    borderRadius: 15,
+    marginTop: 15,
   },
   TextInput: {
     height: HIGHT.BUTTON,
@@ -116,8 +123,9 @@ const styles = StyleSheet.create({
     height: HIGHT.BUTTON,
     alignItems: ALIGNITEMS.ITEM,
     justifyContent: JUSTIFYCONTENT.CENTER,
-    marginTop: MARGINTOP.FULL,
+    // marginTop: MARGINTOP.FULL,
     backgroundColor: COLOR.BUTTON_BACKGROUND,
+    marginTop: 60,
   },
   Button: {
     color: COLOR.APP_BACKGROUND,

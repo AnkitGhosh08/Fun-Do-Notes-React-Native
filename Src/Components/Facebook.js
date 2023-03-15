@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   ALIGNITEMS,
   BORDERRADIUS,
@@ -20,8 +21,8 @@ const SocialButton = ({buttonTitle, onPress}) => {
   return (
     <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
       <View style={styles.icon}>
-        <FontAwesome
-          name={'google'}
+        <Ionicons
+          name={'logo-facebook'}
           style={styles.icon}
           size={22}
           color={COLOR.APP_BACKGROUND}
@@ -46,10 +47,11 @@ const styles = StyleSheet.create({
     padding: PADDING.TEXTINPUT,
     flexDirection: FLEXDIRECTION.DIRECTION,
     marginTop: MARGINTOP.FULL,
-    backgroundColor: COLOR.SOCIAL_BUTTON,
+    backgroundColor: '#3b5998',
     height: 45,
     width: 45,
     borderRadius: 30,
+    marginLeft: 80,
   },
   icon: {
     width: WIDTH.ICON,

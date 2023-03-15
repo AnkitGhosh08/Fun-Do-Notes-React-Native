@@ -7,10 +7,13 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import SocialButton from '../Components/SocialButton';
 import {AuthContext} from '../Navigations/AuthProvider';
-import stringsOfLanguages from '../Utility/Localization';
+import LinearGradient from 'react-native-linear-gradient';
+import Facebook from '../Components/Facebook';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import {
   ALIGNITEMS,
   BORDERRADIUS,
@@ -22,24 +25,17 @@ import {
   HIGHT,
   JUSTIFYCONTENT,
   MARGINBOTTON,
-  MARGINLIFT,
   MARGINTOP,
   PADDING,
   WIDTH,
 } from '../Utility/Theme';
 
 const Login = ({navigation}) => {
-  //console.log(stringsOfLanguages, '11111111');
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {login, googleLogin} = useContext(AuthContext);
-
-  // const toggle = useSelector(state => state.toggle);
-  // const dispatch = useDispatch();
-
-  const localization = useSelector(state => state.localization);
+  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+  const {login, googleLogin, facebookLogin} = useContext(AuthContext);
 
   const Validation = () => {
     let regxEmail = /^[A-Za-z0-9+_.-]+@(.+)$/;
@@ -86,10 +82,16 @@ const Login = ({navigation}) => {
       </TouchableOpacity>
 
       <View style={styles.inputView}>
+        <Ionicons
+          name="person-outline"
+          size={25}
+          color="white"
+          style={styles.icon}
+        />
         <TextInput
           style={styles.TextInput}
           placeholder="Email"
-          placeholderTextColor="#003f5c"
+          placeholderTextColor="white"
           onChangeText={text => setEmail(text)}
           value={email}
         />
@@ -97,14 +99,34 @@ const Login = ({navigation}) => {
       <Text style={{color: 'red'}}>{error.user}</Text>
 
       <View style={styles.inputView}>
+        <Ionicons
+          name="lock-closed-outline"
+          size={25}
+          color="white"
+          style={styles.icon}
+        />
         <TextInput
           style={styles.TextInput}
           placeholder="Password"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
+          placeholderTextColor="white"
+          secureTextEntry={isPasswordSecure}
+          autoCorrect={false}
           onChangeText={text => setPassword(text)}
           value={password}
         />
+        <TouchableOpacity
+          onPress={() => {
+            isPasswordSecure
+              ? setIsPasswordSecure(false)
+              : setIsPasswordSecure(true);
+          }}>
+          <Ionicons
+            name={isPasswordSecure ? 'eye-off-outline' : 'eye-outline'}
+            size={25}
+            color="white"
+            style={styles.icon}
+          />
+        </TouchableOpacity>
       </View>
       <Text style={styles.textFailed}>{error.password}</Text>
 
@@ -114,15 +136,28 @@ const Login = ({navigation}) => {
         <Text>Forgot Password ?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginBtn} onPress={onSignIn}>
-        <Text style={styles.bottonText}>LOGIN</Text>
-      </TouchableOpacity>
+      <LinearGradient
+        colors={['#74ddf7', '#4058f5', '#b940f5']}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        locations={[0, 0.7, 0.9]}
+        style={styles.loginBtn}>
+        <TouchableOpacity onPress={onSignIn}>
+          <Text style={styles.bottonText}>LOGIN</Text>
+        </TouchableOpacity>
+      </LinearGradient>
 
-      <SocialButton
-        buttonTitle="Sign In with Google"
-        onPress={() => googleLogin()}
-      />
-
+      <View style={styles.scfcbttn}>
+        <SocialButton
+          buttonTitle="Sign In with Google"
+          onPress={() => googleLogin()}
+        />
+        <Facebook
+          onPress={() =>
+            facebookLogin().then(() => console.log('Signed in with Facebook!'))
+          }
+        />
+      </View>
       <TouchableOpacity
         style={styles.signupButton}
         onPress={() => navigation.navigate('SignUp')}>
@@ -149,28 +184,32 @@ const styles = StyleSheet.create({
     justifyContent: JUSTIFYCONTENT.CENTER,
   },
   image: {
-    marginBottom: MARGINBOTTON.BOTTOM,
+    // marginBottom: MARGINBOTTON.BOTTOM,
     width: WIDTH.IMAGE_WIDHT,
     height: HIGHT.IMAGE_HIGHT,
   },
   inputView: {
     backgroundColor: COLOR.TEXTINPUT_BACKGROUND,
-    borderRadius: BORDERRADIUS.TOPBAR_RADIUS,
+    //borderRadius: BORDERRADIUS.TOPBAR_RADIUS,
     width: WIDTH.TEXTINPUT,
     height: HIGHT.INPUTTEXT,
     marginBottom: MARGINBOTTON.LOGIN_TEXT,
     flexDirection: FLEXDIRECTION.DIRECTION,
+    borderRadius: 15,
   },
   TextInput: {
     height: HIGHT.BUTTON,
     flex: FLEX.FLEX,
     padding: PADDING.LOGIN_TEXT,
-    marginLeft: MARGINLIFT.LEFT,
+    // marginLeft: MARGINLIFT.LEFT,
+    //borderBottomWidth: 1,
+    alignSelf: 'center',
   },
   forgot_button: {
     height: HIGHT.FORGETBUTTON,
     marginBottom: HIGHT.FORGETBUTTON,
     fontSize: HIGHT.FORGETBUTTON,
+    marginLeft: 170,
   },
   loginBtn: {
     width: WIDTH.LOGINBUTTON,
@@ -179,7 +218,7 @@ const styles = StyleSheet.create({
     alignItems: ALIGNITEMS.ITEM,
     justifyContent: JUSTIFYCONTENT.CENTER,
     marginTop: MARGINTOP.FULL,
-    backgroundColor: COLOR.BUTTON_BACKGROUND,
+    //backgroundColor: COLOR.BUTTON_BACKGROUND,
   },
   signupButton: {
     fontSize: FONTSIZE.SIGNUPBUTTON,
@@ -187,8 +226,23 @@ const styles = StyleSheet.create({
   },
   textFailed: {
     color: COLOR.RED,
+    marginTop: 5,
   },
   bottonText: {
     color: COLOR.APP_BACKGROUND,
+  },
+  // linearGradient: {
+  //   height: '4%',
+  //   width: '50%',
+  //   // paddingLeft: 15,
+  //   //paddingRight: 15,
+  //   borderRadius: 25,
+  // },
+  icon: {
+    margin: 8,
+  },
+  scfcbttn: {
+    flexDirection: 'row',
+    marginTop: 15,
   },
 });
